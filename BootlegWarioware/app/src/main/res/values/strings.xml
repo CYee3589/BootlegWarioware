@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Bootleg Warioware</string>
+
+    <string name="title">Bootleg Warioware</string>
+    <string name="play_button_title">Lets Go</string>
+
+    <string name="results_title">Results</string>
+    <string name="retry_button">Play Again</string>
+    <string name="go_back_button">Go back to Menu</string>
+
+    <string name="loading_score">000</string>
+
+
+</resources>
