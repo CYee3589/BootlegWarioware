@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_title" >
         <action
             android:id="@+id/action_titleFragment_to_loadingFragment"
-            app:destination="@id/loadingFragment" />
+            app:destination="@id/loadingFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/loadingFragment"
@@ -21,33 +23,56 @@
         tools:layout="@layout/fragment_loading" >
         <action
             android:id="@+id/action_loadingFragment_to_demoGameFragment"
-            app:destination="@id/demoGameFragment" />
-        <action
-            android:id="@+id/action_loadingFragment_to_resultsFragment"
-            app:destination="@id/resultsFragment" />
+            app:destination="@id/demoGameFragment"
+            app:enterAnim="@anim/clear_to_solid"
+            app:exitAnim="@anim/curtain_up" />
         <argument
             android:name="isGamePassed"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_loadingFragment_to_gameOverFragment"
+            app:destination="@id/gameOverFragment" />
     </fragment>
     <fragment
         android:id="@+id/demoGameFragment"
         android:name="com.example.bootlegwarioware.DemoGameFragment"
         android:label="fragment_demo_game"
         tools:layout="@layout/fragment_demo_game" >
+        <argument
+            android:name="difficulty"
+            app:argType="integer" />
+        <argument
+            android:name="speed"
+            app:argType="integer" />
         <action
-            android:id="@+id/action_demoGameFragment_to_loadingFragment"
-            app:destination="@id/loadingFragment" />
+            android:id="@+id/action_demoGameFragment_to_gameResultsFragment"
+            app:destination="@id/gameResultsFragment"
+            app:enterAnim="@anim/curtain_down" />
     </fragment>
     <fragment
-        android:id="@+id/resultsFragment"
-        android:name="com.example.bootlegwarioware.ResultsFragment"
-        android:label="fragment_results"
-        tools:layout="@layout/fragment_results" >
+        android:id="@+id/introCountdownFragment"
+        android:name="com.example.bootlegwarioware.IntroCountdownFragment"
+        android:label="fragment_intro_countdown"
+        tools:layout="@layout/fragment_intro_countdown" />
+    <fragment
+        android:id="@+id/gameOverFragment"
+        android:name="com.example.bootlegwarioware.GameOverFragment"
+        android:label="fragment_game_over"
+        tools:layout="@layout/fragment_game_over" >
         <action
-            android:id="@+id/action_resultsFragment_to_loadingFragment"
-            app:destination="@id/loadingFragment" />
-        <action
-            android:id="@+id/action_resultsFragment_to_titleFragment"
+            android:id="@+id/action_gameOverFragment_to_titleFragment"
             app:destination="@id/titleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameResultsFragment"
+        android:name="com.example.bootlegwarioware.GameResultsFragment"
+        android:label="fragment_game_results"
+        tools:layout="@layout/fragment_game_results" >
+        <action
+            android:id="@+id/action_gameResultsFragment_to_loadingFragment"
+            app:destination="@id/loadingFragment" />
+        <argument
+            android:name="isGameCompleted"
+            app:argType="boolean" />
     </fragment>
 </navigation>
