@@ -6,9 +6,67 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int livesLeft = 4;
+    private int score = 1;
+    private int difficulty = 1;
+    private int speed = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+    public void setLivesLeft(int newLives){
+        this.livesLeft = newLives;
+    }
+
+    public void setScore(int newScore){
+        this.score = newScore;
+    }
+
+    public void setDifficulty(int newDifficulty){
+        this.difficulty = newDifficulty;
+    }
+
+    public void setSpeed(int newSpeed){
+        this.speed = newSpeed;
+    }
+
+    public void setBackToNormal(){
+        this.livesLeft = 4;
+        this.score = 1;
+        this.difficulty = 1;
+        this.speed = 1;
+    }
+
+
+    public int getLivesLeft(){
+        return this.livesLeft;
+    }
+
+    public int getScore(){
+        return this.score;
+    }
+
+    public int getDifficulty(){
+        return this.difficulty;
+    }
+
+    public int getSpeed(){
+        return this.speed;
+    }
+
+    public void loseLife(){
+        this.livesLeft -= 1;
+    }
+
+    public void incrementScore(){
+        this.score += 1;
+    }
+
+    public boolean isGameOver(){
+        return this.livesLeft == 0;
+    }
+
 }

@@ -19,7 +19,7 @@ public class DemoGameFragment extends Fragment {
     private FragmentDemoGameBinding binding;
 
     int i = 0;
-    int milliSecCounter = 5000;
+    int milliSecCounter = 2500;
     int milliSecInterval= 100;
 
     boolean isGameCompleted = false;
@@ -29,6 +29,9 @@ public class DemoGameFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentDemoGameBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        int difficulty = DemoGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
+        int speed = DemoGameFragmentArgs.fromBundle(requireArguments()).getSpeed();
 
         binding.demoButton.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.os.CountDownTimer;
@@ -16,7 +17,6 @@ import com.example.bootlegwarioware.databinding.FragmentLoadingBinding;
 public class LoadingFragment extends Fragment {
 
     private FragmentLoadingBinding binding;
-    private GameViewModel viewModel;
 
     int i = 0;
     int milliSecCounter = 1500;
@@ -29,11 +29,11 @@ public class LoadingFragment extends Fragment {
 
         binding = FragmentLoadingBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        viewModel = new ViewModelProvider(this).get(GameViewModel.class);
 
         binding.progressbar.setProgress(100);
+        updateLifeSymbols(((MainActivity)getContext()).getLivesLeft());
 
-        binding.scoreTextView.setText(String.valueOf(viewModel.points));
+        binding.scoreTextView.setText(String.valueOf(((MainActivity)getContext()).getScore()));
 
         CountDownTimer countDown = new CountDownTimer(milliSecCounter,milliSecInterval) {
             @Override
@@ -46,7 +46,10 @@ public class LoadingFragment extends Fragment {
             public void onFinish() {
                 i++;
                 binding.progressbar.setProgress(0);
-                Navigation.findNavController(view).navigate(R.id.action_loadingFragment_to_demoGameFragment);
+                NavDirections action = LoadingFragmentDirections.actionLoadingFragmentToDemoGameFragment(
+                        ((MainActivity)getContext()).getDifficulty(),
+                        ((MainActivity)getContext()).getSpeed());
+                Navigation.findNavController(view).navigate(action);
             }
         };
 
@@ -59,5 +62,22 @@ public class LoadingFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void updateLifeSymbols(int livesLeft){
+        switch(livesLeft) {
+            case 0:
+                binding.life1ImageView.setVisibility(View.INVISIBLE);
+            case 1:
+                binding.life2ImageView.setVisibility(View.INVISIBLE);
+            case 2:
+                binding.life3ImageView.setVisibility(View.INVISIBLE);
+            case 3:
+                binding.life4ImageView.setVisibility(View.INVISIBLE);
+                break;
+            default:
+                System.out.println("ERROR here");
+                break;
+        }
     }
 }

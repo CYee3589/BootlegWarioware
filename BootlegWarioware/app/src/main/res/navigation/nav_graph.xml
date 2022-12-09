@@ -26,12 +26,6 @@
             app:destination="@id/demoGameFragment"
             app:enterAnim="@anim/clear_to_solid"
             app:exitAnim="@anim/curtain_up" />
-        <argument
-            android:name="isGamePassed"
-            app:argType="boolean" />
-        <action
-            android:id="@+id/action_loadingFragment_to_gameOverFragment"
-            app:destination="@id/gameOverFragment" />
     </fragment>
     <fragment
         android:id="@+id/demoGameFragment"
@@ -62,6 +56,9 @@
         <action
             android:id="@+id/action_gameOverFragment_to_titleFragment"
             app:destination="@id/titleFragment" />
+        <argument
+            android:name="score"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/gameResultsFragment"
@@ -74,5 +71,8 @@
         <argument
             android:name="isGameCompleted"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_gameResultsFragment_to_gameOverFragment"
+            app:destination="@id/gameOverFragment" />
     </fragment>
 </navigation>

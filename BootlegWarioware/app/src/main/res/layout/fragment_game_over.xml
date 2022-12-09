@@ -9,6 +9,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/resultsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -19,17 +20,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonRetry"
+        android:id="@+id/retryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:text="@string/retry_button"
-        app:layout_constraintBottom_toTopOf="@+id/buttonReturnToMenu"
+        app:layout_constraintBottom_toTopOf="@+id/returnToTitleButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonReturnToMenu"
+        android:id="@+id/returnToTitleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"

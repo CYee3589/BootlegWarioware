@@ -19,7 +19,6 @@ import com.example.bootlegwarioware.databinding.FragmentLoadingBinding;
 public class GameResultsFragment extends Fragment {
 
     private FragmentGameResultsBinding binding;
-    private GameViewModel viewModel;
 //    private GameViewModelFactory viewModelFactory;
 
     int i = 0;
@@ -32,16 +31,16 @@ public class GameResultsFragment extends Fragment {
 
         binding = FragmentGameResultsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        viewModel = new ViewModelProvider(this).get(GameViewModel.class);
 
         boolean isGameCompleted = GameResultsFragmentArgs.fromBundle(requireArguments()).getIsGameCompleted();
 
-        // Used to test if data transferal is successful
-        if (isGameCompleted){
-            binding.scoreTextView.setText("TRUE");
-        } else {
-            binding.scoreTextView.setText("FALSE");
+        // Lose life if Game wasn't completed
+        if (!isGameCompleted){
+            ((MainActivity)getContext()).loseLife();
         }
+
+        binding.scoreTextView.setText(String.valueOf(((MainActivity)getContext()).getScore()));
+        updateLifeSymbols(((MainActivity)getContext()).getLivesLeft());
 
         binding.progressbar.setProgress(100);
         CountDownTimer countDown = new CountDownTimer(milliSecCounter,milliSecInterval) {
@@ -55,7 +54,16 @@ public class GameResultsFragment extends Fragment {
             public void onFinish() {
                 i++;
                 binding.progressbar.setProgress(0);
-                Navigation.findNavController(view).navigate(R.id.action_gameResultsFragment_to_loadingFragment);
+
+                // Check if Game Over, otherwise continue with the game
+                if (((MainActivity)getContext()).isGameOver()){
+                    System.out.println("Made it HERE");
+                    NavDirections action = GameResultsFragmentDirections.actionGameResultsFragmentToGameOverFragment(((MainActivity)getContext()).getScore());
+                    Navigation.findNavController(view).navigate(action);
+                } else {
+                    ((MainActivity)getContext()).incrementScore();
+                    Navigation.findNavController(view).navigate(R.id.action_gameResultsFragment_to_loadingFragment);
+                }
             }
         };
 
@@ -69,4 +77,23 @@ public class GameResultsFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    public void updateLifeSymbols(int livesLeft){
+        switch(livesLeft) {
+            case 0:
+                binding.life1ImageView.setVisibility(View.INVISIBLE);
+            case 1:
+                binding.life2ImageView.setVisibility(View.INVISIBLE);
+            case 2:
+                binding.life3ImageView.setVisibility(View.INVISIBLE);
+            case 3:
+                binding.life4ImageView.setVisibility(View.INVISIBLE);
+                break;
+            default:
+                System.out.println("ERROR here");
+                break;
+        }
+    }
+
+
 }

@@ -7,7 +7,53 @@
     android:layout_height="match_parent"
     tools:context=".GameResultsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/healthGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="90dp" />
+
+    <ImageView
+        android:id="@+id/life1ImageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/healthGuideline"
+        app:layout_constraintEnd_toStartOf="@+id/life2ImageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/heart" />
+
+    <ImageView
+        android:id="@+id/life2ImageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/healthGuideline"
+        app:layout_constraintEnd_toStartOf="@+id/life3ImageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/life1ImageView"
+        android:src="@drawable/heart" />
+
+    <ImageView
+        android:id="@+id/life3ImageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/healthGuideline"
+        app:layout_constraintEnd_toStartOf="@+id/life4ImageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/life2ImageView"
+        android:src="@drawable/heart" />
+
+    <ImageView
+        android:id="@+id/life4ImageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/healthGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/life3ImageView"
+        android:src="@drawable/heart" />
+
     <TextView
         android:id="@+id/scoreTextView"
         android:layout_width="wrap_content"
@@ -24,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="161dp" />
+        app:layout_constraintGuide_begin="520dp" />
 
     <ProgressBar
         android:id="@+id/progressbar"
