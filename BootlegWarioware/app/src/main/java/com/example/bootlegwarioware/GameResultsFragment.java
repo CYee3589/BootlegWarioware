@@ -11,6 +11,8 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.example.bootlegwarioware.databinding.FragmentGameResultsBinding;
 import com.example.bootlegwarioware.databinding.FragmentLoadingBinding;
@@ -57,12 +59,20 @@ public class GameResultsFragment extends Fragment {
 
                 // Check if Game Over, otherwise continue with the game
                 if (((MainActivity)getContext()).isGameOver()){
-                    System.out.println("Made it HERE");
-                    NavDirections action = GameResultsFragmentDirections.actionGameResultsFragmentToGameOverFragment(((MainActivity)getContext()).getScore());
-                    Navigation.findNavController(view).navigate(action);
+                    binding.gameOverTextView.setText(R.string.game_over);
+                    runGameOverAnimation();
+                    view.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            NavDirections action = GameResultsFragmentDirections.actionGameResultsFragmentToGameOverFragment(((MainActivity)getContext()).getScore());
+                            Navigation.findNavController(view).navigate(action);
+                        }
+                    }, 5000);
+
                 } else {
                     ((MainActivity)getContext()).incrementScore();
-                    Navigation.findNavController(view).navigate(R.id.action_gameResultsFragment_to_loadingFragment);
+                    NavDirections action = GameResultsFragmentDirections.actionGameResultsFragmentToLoadingFragment();
+                    Navigation.findNavController(view).navigate(action);
                 }
             }
         };
@@ -95,5 +105,10 @@ public class GameResultsFragment extends Fragment {
         }
     }
 
-
+    private void runGameOverAnimation() {
+        Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.game_over_anim);
+        anim.reset();
+        binding.gameOverTextView.clearAnimation();
+        binding.gameOverTextView.startAnimation(anim);
+    }
 }

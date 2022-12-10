@@ -11,6 +11,8 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.example.bootlegwarioware.databinding.FragmentLoadingBinding;
 
@@ -34,6 +36,13 @@ public class LoadingFragment extends Fragment {
         updateLifeSymbols(((MainActivity)getContext()).getLivesLeft());
 
         binding.scoreTextView.setText(String.valueOf(((MainActivity)getContext()).getScore()));
+
+//        // For first round only
+//        if (((MainActivity)getContext()).getScore() == 1){
+//            this.milliSecCounter = 2500;
+//        }
+
+        runAnimation();
 
         CountDownTimer countDown = new CountDownTimer(milliSecCounter,milliSecInterval) {
             @Override
@@ -79,5 +88,12 @@ public class LoadingFragment extends Fragment {
                 System.out.println("ERROR here");
                 break;
         }
+    }
+
+    private void runAnimation() {
+        Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.word_anim);
+        anim.reset();
+        binding.gameWordTextView.clearAnimation();
+        binding.gameWordTextView.startAnimation(anim);
     }
 }

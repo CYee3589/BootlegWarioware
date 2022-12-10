@@ -3,6 +3,7 @@ package com.example.bootlegwarioware;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -31,9 +32,19 @@ public class GameOverFragment extends Fragment {
         binding.returnToTitleButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Navigation.findNavController(view).navigate(R.id.action_gameOverFragment_to_titleFragment);
+                NavDirections action = GameOverFragmentDirections.actionGameOverFragmentToTitleFragment();
+                Navigation.findNavController(view).navigate(action);
             }
         });
+
+        binding.retryButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                NavDirections action = GameOverFragmentDirections.actionGameOverFragmentToIntroCountdownFragment();
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
+
 
         // Inflate the layout for this fragment
         return view;

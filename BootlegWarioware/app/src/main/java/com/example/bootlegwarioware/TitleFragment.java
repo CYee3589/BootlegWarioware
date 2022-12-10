@@ -3,6 +3,7 @@ package com.example.bootlegwarioware;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -26,8 +27,8 @@ public class TitleFragment extends Fragment {
         binding.playButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Navigation.findNavController(view).navigate(R.id.action_titleFragment_to_loadingFragment);
-
+                NavDirections action = TitleFragmentDirections.actionTitleFragmentToIntroCountdownFragment();
+                Navigation.findNavController(view).navigate(action);
             }
         });
 
