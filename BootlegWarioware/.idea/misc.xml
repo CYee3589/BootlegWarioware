@@ -9,10 +9,12 @@
         <entry key="app/src/main/res/layout/fragment_demo_game.xml" value="0.3473731884057971" />
         <entry key="app/src/main/res/layout/fragment_game_over.xml" value="0.2930253623188406" />
         <entry key="app/src/main/res/layout/fragment_game_results.xml" value="0.2930253623188406" />
+        <entry key="app/src/main/res/layout/fragment_high_score.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_intro_countdown.xml" value="0.2930253623188406" />
         <entry key="app/src/main/res/layout/fragment_loading.xml" value="0.45986403313235963" />
         <entry key="app/src/main/res/layout/fragment_order_game.xml" value="0.29846014492753625" />
         <entry key="app/src/main/res/layout/fragment_results.xml" value="0.3473731884057971" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_title.xml" value="0.3759564607039742" />
       </map>
     </option>
