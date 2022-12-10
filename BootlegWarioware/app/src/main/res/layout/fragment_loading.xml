@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".LoadingFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/healthGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#FFFFFF"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="90dp" />
 
@@ -18,47 +19,52 @@
         android:id="@+id/life1ImageView"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:src="@drawable/heart"
         app:layout_constraintBottom_toTopOf="@+id/healthGuideline"
         app:layout_constraintEnd_toStartOf="@+id/life2ImageView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/heart" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/life2ImageView"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:src="@drawable/heart"
         app:layout_constraintBottom_toTopOf="@+id/healthGuideline"
         app:layout_constraintEnd_toStartOf="@+id/life3ImageView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/life1ImageView"
-        android:src="@drawable/heart" />
+        app:layout_constraintStart_toEndOf="@+id/life1ImageView" />
 
     <ImageView
         android:id="@+id/life3ImageView"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:src="@drawable/heart"
         app:layout_constraintBottom_toTopOf="@+id/healthGuideline"
         app:layout_constraintEnd_toStartOf="@+id/life4ImageView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/life2ImageView"
-        android:src="@drawable/heart" />
+        app:layout_constraintStart_toEndOf="@+id/life2ImageView" />
 
     <ImageView
         android:id="@+id/life4ImageView"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:src="@drawable/heart"
         app:layout_constraintBottom_toTopOf="@+id/healthGuideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/life3ImageView"
-        android:src="@drawable/heart" />
+        app:layout_constraintStart_toEndOf="@+id/life3ImageView" />
 
     <TextView
         android:id="@+id/scoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/loading_score"
+        android:textColor="#FFFFFF"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -88,6 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DEMO"
+        android:textColor="#FFFFFF"
         android:textSize="45sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"

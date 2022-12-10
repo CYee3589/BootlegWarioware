@@ -15,6 +15,16 @@
             app:destination="@id/introCountdownFragment"
             app:enterAnim="@anim/clear_to_solid"
             app:exitAnim="@anim/solid_to_clear" />
+        <action
+            android:id="@+id/action_titleFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@animator/fade_in"
+            app:exitAnim="@animator/fade_out" />
+        <action
+            android:id="@+id/action_titleFragment_to_highScoreFragment"
+            app:destination="@id/highScoreFragment"
+            app:enterAnim="@animator/fade_in"
+            app:exitAnim="@animator/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/loadingFragment"
@@ -86,4 +96,14 @@
             app:enterAnim="@anim/clear_to_solid"
             app:exitAnim="@anim/curtain_up" />
     </fragment>
+    <fragment
+        android:id="@+id/highScoreFragment"
+        android:name="com.example.bootlegwarioware.HighScoreFragment"
+        android:label="fragment_high_score"
+        tools:layout="@layout/fragment_high_score" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.bootlegwarioware.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
