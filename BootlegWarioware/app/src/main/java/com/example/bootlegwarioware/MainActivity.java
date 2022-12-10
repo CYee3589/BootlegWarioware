@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int livesLeft = 1;
+    private int livesLeft = 4;
     private int score = 1;
     private int difficulty = 1;
     private int speed = 1;
