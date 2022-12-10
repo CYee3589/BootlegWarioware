@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toStartOf="@+id/life2ImageView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/heart" />
+        android:src="@drawable/life_heart" />
 
     <ImageView
         android:id="@+id/life2ImageView"
@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toStartOf="@+id/life3ImageView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/life1ImageView"
-        android:src="@drawable/heart" />
+        android:src="@drawable/life_heart" />
 
     <ImageView
         android:id="@+id/life3ImageView"
@@ -42,7 +42,7 @@
         app:layout_constraintEnd_toStartOf="@+id/life4ImageView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/life2ImageView"
-        android:src="@drawable/heart" />
+        android:src="@drawable/life_heart" />
 
     <ImageView
         android:id="@+id/life4ImageView"
@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/life3ImageView"
-        android:src="@drawable/heart" />
+        android:src="@drawable/life_heart" />
 
     <TextView
         android:id="@+id/scoreTextView"

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/titleFragment">
+    app:startDestination="@id/orderGameFragment">
 
     <fragment
         android:id="@+id/titleFragment"
@@ -86,4 +86,9 @@
             app:enterAnim="@anim/clear_to_solid"
             app:exitAnim="@anim/curtain_up" />
     </fragment>
+    <fragment
+        android:id="@+id/orderGameFragment"
+        android:name="com.example.bootlegwarioware.OrderGameFragment"
+        android:label="fragment_order_game"
+        tools:layout="@layout/fragment_order_game" />
 </navigation>
