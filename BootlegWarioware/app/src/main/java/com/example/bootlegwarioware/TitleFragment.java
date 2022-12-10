@@ -32,6 +32,22 @@ public class TitleFragment extends Fragment {
             }
         });
 
+        binding.highscoreButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                NavDirections action = TitleFragmentDirections.actionTitleFragmentToHighScoreFragment();
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
+
+        binding.settingButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                NavDirections action = TitleFragmentDirections.actionTitleFragmentToSettingsFragment();
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
+
         // Inflate the layout for this fragment
         return view;
     }
