@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/orderGameFragment">
+    app:startDestination="@id/titleFragment">
 
     <fragment
         android:id="@+id/titleFragment"
@@ -106,4 +106,16 @@
         android:name="com.example.bootlegwarioware.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/orderGameFragment"
+        android:name="com.example.bootlegwarioware.OrderGame.OrderGameFragment"
+        android:label="fragment_order_game"
+        tools:layout="@layout/fragment_order_game" >
+        <argument
+            android:name="difficulty"
+            app:argType="integer" />
+        <argument
+            android:name="speed"
+            app:argType="integer" />
+    </fragment>
 </navigation>
