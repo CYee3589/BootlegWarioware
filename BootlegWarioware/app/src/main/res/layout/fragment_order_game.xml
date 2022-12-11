@@ -19,8 +19,8 @@
         android:id="@+id/combination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
         android:textSize="20sp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,6 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/order_game_club_button"
-        android:text="1"
         app:layout_constraintEnd_toStartOf="@+id/diamond_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +48,6 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/order_game_diamond_button"
-        android:text="2"
         app:layout_constraintEnd_toStartOf="@+id/heart_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/club_button"
@@ -60,7 +58,6 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/order_game_heart_button"
-        android:text="3"
         app:layout_constraintEnd_toStartOf="@+id/spade_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/diamond_button"
@@ -71,10 +68,75 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/order_game_spade_button"
-        android:text="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/heart_button"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <ImageView
+        android:id="@+id/status_light1"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/order_game_status_light_none"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/status_light2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/status_light2"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/order_game_status_light_none"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/status_light3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/status_light1" />
+
+    <ImageView
+        android:id="@+id/status_light3"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/order_game_status_light_none"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/status_light4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/status_light2" />
+
+    <ImageView
+        android:id="@+id/status_light4"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/order_game_status_light_none"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/status_light5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/status_light3" />
+
+    <ImageView
+        android:id="@+id/status_light5"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/order_game_status_light_none"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/status_light4" />
+
+    <ProgressBar
+        android:id="@+id/minigameTimerBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
