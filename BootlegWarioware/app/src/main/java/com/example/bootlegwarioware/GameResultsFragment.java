@@ -21,7 +21,6 @@ import com.example.bootlegwarioware.databinding.FragmentLoadingBinding;
 public class GameResultsFragment extends Fragment {
 
     private FragmentGameResultsBinding binding;
-//    private GameViewModelFactory viewModelFactory;
 
     int i = 0;
     int milliSecCounter = 2000;
