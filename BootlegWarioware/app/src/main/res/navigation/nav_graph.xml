@@ -26,6 +26,7 @@
             app:enterAnim="@animator/fade_in"
             app:exitAnim="@animator/fade_out" />
     </fragment>
+
     <fragment
         android:id="@+id/loadingFragment"
         android:name="com.example.bootlegwarioware.LoadingFragment"
@@ -37,6 +38,7 @@
             app:enterAnim="@anim/clear_to_solid"
             app:exitAnim="@anim/curtain_up" />
     </fragment>
+
     <fragment
         android:id="@+id/demoGameFragment"
         android:name="com.example.bootlegwarioware.DemoGameFragment"
@@ -53,6 +55,7 @@
             app:destination="@id/gameResultsFragment"
             app:enterAnim="@anim/curtain_down" />
     </fragment>
+
     <fragment
         android:id="@+id/introCountdownFragment"
         android:name="com.example.bootlegwarioware.IntroCountdownFragment"
@@ -62,6 +65,7 @@
             android:id="@+id/action_introCountdownFragment_to_loadingFragment"
             app:destination="@id/loadingFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/gameOverFragment"
         android:name="com.example.bootlegwarioware.GameOverFragment"
@@ -79,6 +83,7 @@
             app:enterAnim="@anim/clear_to_solid"
             app:exitAnim="@anim/solid_to_clear" />
     </fragment>
+
     <fragment
         android:id="@+id/gameResultsFragment"
         android:name="com.example.bootlegwarioware.GameResultsFragment"
@@ -96,26 +101,28 @@
             app:enterAnim="@anim/clear_to_solid"
             app:exitAnim="@anim/curtain_up" />
     </fragment>
+
     <fragment
         android:id="@+id/highScoreFragment"
         android:name="com.example.bootlegwarioware.HighScoreFragment"
         android:label="fragment_high_score"
-        tools:layout="@layout/fragment_high_score" />
+        tools:layout="@layout/fragment_high_score" >
+        <action
+            android:id="@+id/action_highScoreFragment_to_titleFragment"
+            app:destination="@id/titleFragment"
+            app:enterAnim="@animator/fade_in"
+            app:exitAnim="@animator/fade_out"/>
+    </fragment>
+
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.bootlegwarioware.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
-    <fragment
-        android:id="@+id/orderGameFragment"
-        android:name="com.example.bootlegwarioware.OrderGame.OrderGameFragment"
-        android:label="fragment_order_game"
-        tools:layout="@layout/fragment_order_game" >
-        <argument
-            android:name="difficulty"
-            app:argType="integer" />
-        <argument
-            android:name="speed"
-            app:argType="integer" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_titleFragment"
+            app:destination="@id/titleFragment"
+            app:enterAnim="@animator/fade_in"
+            app:exitAnim="@animator/fade_out"/>
     </fragment>
 </navigation>

@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
     private int difficulty = 1;
     private int speed = 1;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
