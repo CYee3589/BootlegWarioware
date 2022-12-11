@@ -3,7 +3,6 @@ package com.example.bootlegwarioware;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
@@ -16,34 +15,50 @@ import android.view.animation.AnimationUtils;
 
 import com.example.bootlegwarioware.databinding.FragmentLoadingBinding;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class LoadingFragment extends Fragment {
 
     private FragmentLoadingBinding binding;
 
     int i = 0;
+    int j;
     int milliSecCounter = 1500;
     int milliSecInterval= 100;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // The 2 arrays that shows the game of index j: game hint and NavDirection
+        NavDirections[] gameDestinations = new NavDirections[]{
+                LoadingFragmentDirections.actionLoadingFragmentToDemoGameFragment(
+                        ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed()),
+                LoadingFragmentDirections.actionLoadingFragmentToOrderGameFragment(
+                        ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())
+        };
+
+        String[] gameNames = new String[]{
+                "DEMO",
+                "ORDER"
+        };
+
         binding = FragmentLoadingBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        // Initialize the beginning looks of the app
         binding.progressbar.setProgress(100);
         updateLifeSymbols(((MainActivity)getContext()).getLivesLeft());
-
         binding.scoreTextView.setText(String.valueOf(((MainActivity)getContext()).getScore()));
 
-//        // For first round only
-//        if (((MainActivity)getContext()).getScore() == 1){
-//            this.milliSecCounter = 2500;
-//        }
+        // Set up random game index and fill in
+        j = getRandomNumber(gameNames.length - 1);
 
+        // Run the game hint animation
+        binding.gameWordTextView.setText(gameNames[j]);
         runAnimation();
 
+        // Set-up and start the countdowntimer for the progress bar and timing
         CountDownTimer countDown = new CountDownTimer(milliSecCounter,milliSecInterval) {
             @Override
             public void onTick(long l) {
@@ -55,10 +70,7 @@ public class LoadingFragment extends Fragment {
             public void onFinish() {
                 i++;
                 binding.progressbar.setProgress(0);
-                NavDirections action = LoadingFragmentDirections.actionLoadingFragmentToDemoGameFragment(
-                        ((MainActivity)getContext()).getDifficulty(),
-                        ((MainActivity)getContext()).getSpeed());
-                Navigation.findNavController(view).navigate(action);
+                Navigation.findNavController(view).navigate(gameDestinations[j]);
             }
         };
 
@@ -73,7 +85,8 @@ public class LoadingFragment extends Fragment {
         binding = null;
     }
 
-    public void updateLifeSymbols(int livesLeft){
+    // Updates the imageView status of the lives
+    private void updateLifeSymbols(int livesLeft){
         switch(livesLeft) {
             case 0:
                 binding.life1ImageView.setVisibility(View.INVISIBLE);
@@ -85,15 +98,20 @@ public class LoadingFragment extends Fragment {
                 binding.life4ImageView.setVisibility(View.INVISIBLE);
                 break;
             default:
-                System.out.println("ERROR here");
                 break;
         }
     }
 
+    // Run game hint animation
     private void runAnimation() {
         Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.word_anim);
         anim.reset();
         binding.gameWordTextView.clearAnimation();
         binding.gameWordTextView.startAnimation(anim);
+    }
+
+    // Get a random number betwee 0-max
+    private int getRandomNumber(int max) {
+        return ThreadLocalRandom.current().nextInt(0, max+1);
     }
 }

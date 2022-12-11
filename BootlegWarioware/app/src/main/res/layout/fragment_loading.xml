@@ -93,7 +93,6 @@
         android:id="@+id/gameWordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DEMO"
         android:textColor="#FFFFFF"
         android:textSize="45sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"

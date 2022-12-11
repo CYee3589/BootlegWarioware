@@ -36,6 +36,11 @@
             app:destination="@id/demoGameFragment"
             app:enterAnim="@anim/clear_to_solid"
             app:exitAnim="@anim/curtain_up" />
+        <action
+            android:id="@+id/action_loadingFragment_to_orderGameFragment"
+            app:destination="@id/orderGameFragment"
+            app:enterAnim="@anim/clear_to_solid"
+            app:exitAnim="@anim/curtain_up" />
     </fragment>
     <fragment
         android:id="@+id/demoGameFragment"
@@ -131,5 +136,9 @@
         <argument
             android:name="speed"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_orderGameFragment_to_gameResultsFragment"
+            app:destination="@id/gameResultsFragment"
+            app:enterAnim="@anim/curtain_down" />
     </fragment>
 </navigation>
