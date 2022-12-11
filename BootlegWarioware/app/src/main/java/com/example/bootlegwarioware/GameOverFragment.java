@@ -14,7 +14,6 @@ import com.example.bootlegwarioware.databinding.FragmentGameOverBinding;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Deque;
 
 public class GameOverFragment extends Fragment {
 
