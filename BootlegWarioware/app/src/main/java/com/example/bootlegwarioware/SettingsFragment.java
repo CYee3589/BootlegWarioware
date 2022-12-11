@@ -17,15 +17,37 @@ import com.example.bootlegwarioware.databinding.FragmentSettingsBinding;
 
 public class SettingsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private FragmentSettingsBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        binding = FragmentSettingsBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+        binding.backButtonSettings.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                NavDirections action = SettingsFragmentDirections.actionSettingsFragmentToTitleFragment();
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
+
+        binding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton button = binding.radioGroup.findViewById(i);
+                switch(button.getText().toString()) {
+                    case "Hard":
+                        ((MainActivity)getContext()).setDifficulty(3);
+                    case "Medium":
+                        ((MainActivity)getContext()).setDifficulty(2);
+                    case "Easy":
+                        ((MainActivity)getContext()).setDifficulty(1);
+                }
+            }
+        });
+
+        return view;
     }
 }
