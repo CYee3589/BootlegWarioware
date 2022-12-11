@@ -34,18 +34,21 @@
             android:id="@+id/hard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/hard"/>
+            android:text="@string/hard"
+            android:textSize="24sp" />
 
         <RadioButton
             android:id="@+id/medium"
             android:layout_width="133dp"
             android:layout_height="wrap_content"
-            android:text="@string/medium" />
+            android:text="@string/medium"
+            android:textSize="24sp" />
 
         <RadioButton
             android:id="@+id/easy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/easy" />
+            android:text="@string/easy"
+            android:textSize="24sp" />
     </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
