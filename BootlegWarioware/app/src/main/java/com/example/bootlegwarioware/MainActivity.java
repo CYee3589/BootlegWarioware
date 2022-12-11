@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private int livesLeft = 4;
     private int score = 1;
     private int difficulty = 1;
     private int speed = 1;
+    private ArrayList<Integer> highscores = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     public void setDifficulty(int newDifficulty){
         this.difficulty = newDifficulty;
     }
+
+    public void setHighscores(ArrayList<Integer> newList){this.highscores = newList;}
 
     public void setSpeed(int newSpeed){
         this.speed = newSpeed;
@@ -56,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     public int getSpeed(){
         return this.speed;
     }
+
+    public ArrayList<Integer> getHighScores() { return this.highscores; }
 
     public void loseLife(){
         this.livesLeft -= 1;
