@@ -5,6 +5,11 @@
     <string name="play_button_title">Lets Go</string>
     <string name="scores_button_title">High Scores</string>
     <string name="settings_button_title">Settings</string>
+    <string name="home">Back</string>
+
+    <string name="hard">Hard</string>
+    <string name="medium">Medium</string>
+    <string name="easy">Easy</string>
 
     <string name="results_title">Results</string>
     <string name="retry_button">Play Again</string>

@@ -100,10 +100,22 @@
         android:id="@+id/highScoreFragment"
         android:name="com.example.bootlegwarioware.HighScoreFragment"
         android:label="fragment_high_score"
-        tools:layout="@layout/fragment_high_score" />
+        tools:layout="@layout/fragment_high_score" >
+        <action
+            android:id="@+id/action_highScoreFragment_to_titleFragment"
+            app:destination="@id/titleFragment"
+            app:enterAnim="@animator/fade_in"
+            app:exitAnim="@animator/fade_out"/>
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.bootlegwarioware.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings">
+    <action
+        android:id="@+id/action_settingsFragment_to_titleFragment"
+        app:destination="@id/titleFragment"
+        app:enterAnim="@animator/fade_in"
+        app:exitAnim="@animator/fade_out"/>
+    </fragment>
 </navigation>
