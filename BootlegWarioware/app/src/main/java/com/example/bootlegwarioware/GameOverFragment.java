@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 
 import com.example.bootlegwarioware.databinding.FragmentGameOverBinding;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+
 public class GameOverFragment extends Fragment {
 
     private FragmentGameOverBinding binding;
@@ -24,6 +28,8 @@ public class GameOverFragment extends Fragment {
         View view = binding.getRoot();
 
         int finalScore = GameOverFragmentArgs.fromBundle(requireArguments()).getScore();
+        addHighScore(finalScore);
+
         binding.resultsTextView.setText(String.valueOf(finalScore));
 
         // Reset game integers
@@ -54,5 +60,12 @@ public class GameOverFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void addHighScore(int score){
+        ArrayList<Integer> highscores = ((MainActivity)getContext()).getHighScores();
+        highscores.add(score);
+        Collections.sort(highscores,Collections.reverseOrder());
+        ((MainActivity)getContext()).setHighscores(highscores);
     }
 }
