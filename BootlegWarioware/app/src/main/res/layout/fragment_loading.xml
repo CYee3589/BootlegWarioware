@@ -64,7 +64,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/loading_score"
-        android:textSize="60sp"
+        android:textSize="80sp"
+        android:fontFamily="@font/out_friend_electric_font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,11 +93,14 @@
         android:id="@+id/gameWordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="60sp"
-        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/warioware_font"
         android:textColor="@color/purple_500"
+        android:textSize="50sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
 

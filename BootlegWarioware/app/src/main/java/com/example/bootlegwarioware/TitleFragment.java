@@ -32,6 +32,7 @@ public class TitleFragment extends Fragment {
         binding.playButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                titleMusic.stop();
                 NavDirections action = TitleFragmentDirections.actionTitleFragmentToIntroCountdownFragment();
                 Navigation.findNavController(view).navigate(action);
             }
