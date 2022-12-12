@@ -1,5 +1,6 @@
 package com.example.bootlegwarioware;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -45,6 +46,10 @@ public class LoadingFragment extends Fragment {
 
         binding = FragmentLoadingBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        // Make animated background animate
+        AnimationDrawable progressAnimation = (AnimationDrawable) binding.getRoot().getBackground();
+        progressAnimation.start();
 
         // Initialize the beginning looks of the app
         binding.progressbar.setProgress(100);

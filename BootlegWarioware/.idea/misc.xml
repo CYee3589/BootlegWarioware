@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bootleg_wario_failed_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/bootleg_wario_loading_background.xml" value="0.234" />
+        <entry key="app/src/main/res/drawable/bootleg_wario_win_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/order_game_club_button.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/order_game_diamond_button.xml" value="0.1305" />
         <entry key="app/src/main/res/drawable/order_game_heart_button.xml" value="0.1305" />
@@ -15,7 +18,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3473731884057971" />
         <entry key="app/src/main/res/layout/fragment_demo_game.xml" value="0.3473731884057971" />
         <entry key="app/src/main/res/layout/fragment_game_over.xml" value="0.2930253623188406" />
-        <entry key="app/src/main/res/layout/fragment_game_results.xml" value="0.2930253623188406" />
+        <entry key="app/src/main/res/layout/fragment_game_results.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_high_score.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/layout/fragment_intro_countdown.xml" value="0.2930253623188406" />
         <entry key="app/src/main/res/layout/fragment_loading.xml" value="0.45986403313235963" />

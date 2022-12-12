@@ -1,5 +1,6 @@
 package com.example.bootlegwarioware;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -35,10 +36,17 @@ public class GameResultsFragment extends Fragment {
 
         boolean isGameCompleted = GameResultsFragmentArgs.fromBundle(requireArguments()).getIsGameCompleted();
 
-        // Lose life if Game wasn't completed
+        // If Game wasn't completed, lose a life and set background.
         if (!isGameCompleted){
             ((MainActivity)getContext()).loseLife();
+            binding.getRoot().setBackgroundResource(R.drawable.bootleg_wario_failed_background);
+        } else {
+            binding.getRoot().setBackgroundResource(R.drawable.bootleg_wario_win_background);
         }
+
+        // Make animated background animate
+        AnimationDrawable progressAnimation = (AnimationDrawable) binding.getRoot().getBackground();
+        progressAnimation.start();
 
         binding.scoreTextView.setText(String.valueOf(((MainActivity)getContext()).getScore()));
         updateLifeSymbols(((MainActivity)getContext()).getLivesLeft());
