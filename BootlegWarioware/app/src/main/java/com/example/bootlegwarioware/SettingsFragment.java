@@ -36,14 +36,17 @@ public class SettingsFragment extends Fragment {
         binding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                RadioButton button = binding.radioGroup.findViewById(i);
+                RadioButton button = radioGroup.findViewById(i);
                 switch(button.getText().toString()) {
                     case "Hard":
                         ((MainActivity)getContext()).setDifficulty(3);
+                        break;
                     case "Medium":
                         ((MainActivity)getContext()).setDifficulty(2);
+                        break;
                     case "Easy":
                         ((MainActivity)getContext()).setDifficulty(1);
+                        break;
                 }
             }
         });
