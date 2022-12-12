@@ -18,13 +18,13 @@
         <action
             android:id="@+id/action_titleFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
-            app:enterAnim="@animator/fade_in"
-            app:exitAnim="@animator/fade_out" />
+            app:enterAnim="@anim/clear_to_solid"
+            app:exitAnim="@anim/solid_to_clear" />
         <action
             android:id="@+id/action_titleFragment_to_highScoreFragment"
             app:destination="@id/highScoreFragment"
-            app:enterAnim="@animator/fade_in"
-            app:exitAnim="@animator/fade_out" />
+            app:enterAnim="@anim/clear_to_solid"
+            app:exitAnim="@anim/solid_to_clear" />
     </fragment>
     <fragment
         android:id="@+id/loadingFragment"
@@ -43,7 +43,9 @@
             app:exitAnim="@anim/curtain_up" />
         <action
             android:id="@+id/action_loadingFragment_to_flyGameFragment"
-            app:destination="@id/flyGameFragment" />
+            app:destination="@id/flyGameFragment"
+            app:enterAnim="@anim/clear_to_solid"
+            app:exitAnim="@anim/curtain_up" />
     </fragment>
     <fragment
         android:id="@+id/demoGameFragment"
@@ -114,8 +116,8 @@
         <action
             android:id="@+id/action_highScoreFragment_to_titleFragment"
             app:destination="@id/titleFragment"
-            app:enterAnim="@animator/fade_in"
-            app:exitAnim="@animator/fade_out"/>
+            app:enterAnim="@anim/clear_to_solid"
+            app:exitAnim="@anim/solid_to_clear" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -123,11 +125,11 @@
         android:label="fragment_settings"
 
         tools:layout="@layout/fragment_settings">
-    <action
-        android:id="@+id/action_settingsFragment_to_titleFragment"
-        app:destination="@id/titleFragment"
-        app:enterAnim="@animator/fade_in"
-        app:exitAnim="@animator/fade_out"/>
+        <action
+            android:id="@+id/action_settingsFragment_to_titleFragment"
+            app:destination="@id/titleFragment"
+            app:enterAnim="@anim/clear_to_solid"
+            app:exitAnim="@anim/solid_to_clear" />
     </fragment>
 
     <fragment
@@ -153,7 +155,8 @@
         tools:layout="@layout/fragment_fly_game" >
         <action
             android:id="@+id/action_flyGameFragment_to_gameResultsFragment"
-            app:destination="@id/gameResultsFragment" />
+            app:destination="@id/gameResultsFragment"
+            app:enterAnim="@anim/curtain_down" />
         <argument
             android:name="difficulty"
             app:argType="integer" />

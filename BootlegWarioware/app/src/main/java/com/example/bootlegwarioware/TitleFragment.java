@@ -1,5 +1,6 @@
 package com.example.bootlegwarioware;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,9 +21,13 @@ public class TitleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         binding = FragmentTitleBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+
+        final MediaPlayer titleMusic = MediaPlayer.create(getActivity(), R.raw.title_music);
+        titleMusic.setLooping(true);
+        titleMusic.start();
 
         binding.playButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -35,6 +40,7 @@ public class TitleFragment extends Fragment {
         binding.highscoreButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                titleMusic.stop();
                 NavDirections action = TitleFragmentDirections.actionTitleFragmentToHighScoreFragment();
                 Navigation.findNavController(view).navigate(action);
             }
@@ -43,6 +49,7 @@ public class TitleFragment extends Fragment {
         binding.settingButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                titleMusic.stop();
                 NavDirections action = TitleFragmentDirections.actionTitleFragmentToSettingsFragment();
                 Navigation.findNavController(view).navigate(action);
             }

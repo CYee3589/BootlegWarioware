@@ -1,6 +1,7 @@
 package com.example.bootlegwarioware;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,7 +25,7 @@ public class LoadingFragment extends Fragment {
 
     int i = 0;
     int j;
-    int milliSecCounter = 1500;
+    int milliSecCounter = 1900;
     int milliSecInterval= 100;
 
     @Override
@@ -42,9 +43,9 @@ public class LoadingFragment extends Fragment {
         };
 
         String[] gameNames = new String[]{
-                "DEMO",
+                "CLICK",
                 "ORDER",
-                "FLY SWAT"
+                "SWAT"
         };
 
         binding = FragmentLoadingBinding.inflate(inflater, container, false);
@@ -53,6 +54,9 @@ public class LoadingFragment extends Fragment {
         // Make animated background animate
         AnimationDrawable progressAnimation = (AnimationDrawable) binding.getRoot().getBackground();
         progressAnimation.start();
+
+        final MediaPlayer nextGameMusic = MediaPlayer.create(getActivity(), R.raw.next_game_music);
+        nextGameMusic.start();
 
         // Initialize the beginning looks of the app
         binding.progressbar.setProgress(100);
