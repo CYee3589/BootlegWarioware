@@ -41,6 +41,9 @@
             app:destination="@id/orderGameFragment"
             app:enterAnim="@anim/clear_to_solid"
             app:exitAnim="@anim/curtain_up" />
+        <action
+            android:id="@+id/action_loadingFragment_to_flyGameFragment"
+            app:destination="@id/flyGameFragment" />
     </fragment>
     <fragment
         android:id="@+id/demoGameFragment"
@@ -142,5 +145,20 @@
             android:id="@+id/action_orderGameFragment_to_gameResultsFragment"
             app:destination="@id/gameResultsFragment"
             app:enterAnim="@anim/curtain_down" />
+    </fragment>
+    <fragment
+        android:id="@+id/flyGameFragment"
+        android:name="com.example.bootlegwarioware.flyGameFragment"
+        android:label="fragment_fly_game"
+        tools:layout="@layout/fragment_fly_game" >
+        <action
+            android:id="@+id/action_flyGameFragment_to_gameResultsFragment"
+            app:destination="@id/gameResultsFragment" />
+        <argument
+            android:name="difficulty"
+            app:argType="integer" />
+        <argument
+            android:name="speed"
+            app:argType="integer" />
     </fragment>
 </navigation>

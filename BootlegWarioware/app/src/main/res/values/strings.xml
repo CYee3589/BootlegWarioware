@@ -23,8 +23,11 @@
     <string name="game_over">GAME OVER</string>
     <string name="countdownGO">GO</string>
 
-<!--    Names of the Minigames-->
+    <!--    Names of the Minigames-->
     <string name="game_demo">DEMO Game</string>
     <string name="game_order">Order</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
