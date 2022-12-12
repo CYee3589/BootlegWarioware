@@ -35,12 +35,15 @@ public class LoadingFragment extends Fragment {
                 LoadingFragmentDirections.actionLoadingFragmentToDemoGameFragment(
                         ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed()),
                 LoadingFragmentDirections.actionLoadingFragmentToOrderGameFragment(
+                        ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed()),
+                LoadingFragmentDirections.actionLoadingFragmentToFlyGameFragment(
                         ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())
         };
 
         String[] gameNames = new String[]{
                 "DEMO",
-                "ORDER"
+                "ORDER",
+                "FLY SWAT"
         };
 
         binding = FragmentLoadingBinding.inflate(inflater, container, false);
