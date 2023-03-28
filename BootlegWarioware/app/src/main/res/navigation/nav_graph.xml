@@ -46,6 +46,31 @@
             app:destination="@id/flyGameFragment"
             app:enterAnim="@anim/clear_to_solid"
             app:exitAnim="@anim/curtain_up" />
+        <action
+            android:id="@+id/action_loadingFragment_to_strengthGameFragment"
+            app:destination="@id/strengthGameFragment"
+            app:enterAnim="@anim/clear_to_solid"
+            app:exitAnim="@anim/curtain_up" />
+        <action
+            android:id="@+id/action_loadingFragment_to_shoppingGameFragment"
+            app:destination="@id/shoppingGameFragment"
+            app:enterAnim="@anim/clear_to_solid"
+            app:exitAnim="@anim/curtain_up" />
+        <action
+            android:id="@+id/action_loadingFragment_to_flirtGameFragment"
+            app:destination="@id/flirtGameFragment"
+            app:enterAnim="@anim/clear_to_solid"
+            app:exitAnim="@anim/curtain_up" />
+        <action
+            android:id="@+id/action_loadingFragment_to_duelGameFragment"
+            app:destination="@id/duelGameFragment"
+            app:enterAnim="@anim/clear_to_solid"
+            app:exitAnim="@anim/curtain_up" />
+        <action
+            android:id="@+id/action_loadingFragment_to_nothingFragment"
+            app:destination="@id/nothingFragment"
+            app:enterAnim="@anim/clear_to_solid"
+            app:exitAnim="@anim/curtain_up" />
     </fragment>
     <fragment
         android:id="@+id/demoGameFragment"
@@ -134,7 +159,7 @@
 
     <fragment
         android:id="@+id/orderGameFragment"
-        android:name="com.example.bootlegwarioware.OrderGame.OrderGameFragment"
+        android:name="com.example.bootlegwarioware.games.OrderGame.OrderGameFragment"
         android:label="fragment_order_game"
         tools:layout="@layout/fragment_order_game" >
         <argument
@@ -150,7 +175,7 @@
     </fragment>
     <fragment
         android:id="@+id/flyGameFragment"
-        android:name="com.example.bootlegwarioware.flyGameFragment"
+        android:name="com.example.bootlegwarioware.games.FlyGame.flyGameFragment"
         android:label="fragment_fly_game"
         tools:layout="@layout/fragment_fly_game" >
         <action
@@ -163,5 +188,86 @@
         <argument
             android:name="speed"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoppingGameFragment"
+        android:name="com.example.bootlegwarioware.games.ShoppingGame.ShoppingGameFragment"
+        android:label="fragment_shopping_game"
+        tools:layout="@layout/fragment_shopping_game" >
+        <argument
+            android:name="difficulty"
+            app:argType="integer" />
+        <argument
+            android:name="speed"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_shoppingGameFragment_to_gameResultsFragment"
+            app:destination="@id/gameResultsFragment"
+            app:enterAnim="@anim/curtain_down" />
+    </fragment>
+    <fragment
+        android:id="@+id/strengthGameFragment"
+        android:name="com.example.bootlegwarioware.games.StrengthGame.StrengthGameFragment"
+        android:label="fragment_strength_game"
+        tools:layout="@layout/fragment_strength_game" >
+        <argument
+            android:name="difficulty"
+            app:argType="integer" />
+        <argument
+            android:name="speed"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_strengthGameFragment_to_gameResultsFragment"
+            app:destination="@id/gameResultsFragment"
+            app:enterAnim="@anim/curtain_down" />
+    </fragment>
+    <fragment
+        android:id="@+id/duelGameFragment"
+        android:name="com.example.bootlegwarioware.games.DuelGame.DuelGameFragment"
+        android:label="fragment_duel_game"
+        tools:layout="@layout/fragment_duel_game" >
+        <argument
+            android:name="difficulty"
+            app:argType="integer" />
+        <argument
+            android:name="speed"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_duelGameFragment_to_gameResultsFragment"
+            app:destination="@id/gameResultsFragment"
+            app:enterAnim="@anim/curtain_down" />
+    </fragment>
+    <fragment
+        android:id="@+id/flirtGameFragment"
+        android:name="com.example.bootlegwarioware.games.FlirtGame.FlirtGameFragment"
+        android:label="fragment_flirt_game"
+        tools:layout="@layout/fragment_flirt_game" >
+        <argument
+            android:name="difficulty"
+            app:argType="integer" />
+        <argument
+            android:name="speed"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_flirtGameFragment_to_gameResultsFragment"
+            app:destination="@id/gameResultsFragment"
+            app:enterAnim="@anim/curtain_down" />
+    </fragment>
+    <fragment
+        android:id="@+id/nothingFragment"
+        android:name="com.example.bootlegwarioware.games.NothingGame.NothingFragment"
+        android:label="fragment_nothing"
+        tools:layout="@layout/fragment_nothing" >
+        <argument
+            android:name="difficulty"
+            app:argType="integer" />
+        <argument
+            android:name="speed"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_nothingFragment_to_gameResultsFragment"
+            app:destination="@id/gameResultsFragment"
+            app:enterAnim="@anim/curtain_down" />
+
     </fragment>
 </navigation>

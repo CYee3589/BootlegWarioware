@@ -1,4 +1,4 @@
-package com.example.bootlegwarioware;
+package com.example.bootlegwarioware.games.FlyGame;
 
 import android.animation.ObjectAnimator;
 import android.graphics.Path;
@@ -13,6 +13,8 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.bootlegwarioware.databinding.FragmentFlyGameBinding;
 
@@ -22,10 +24,12 @@ public class flyGameFragment extends Fragment {
     private FragmentFlyGameBinding binding;
 
     int i = 0;
-    int milliSecCounter = 2500;
-    int milliSecInterval= 100;
+    int milliSecCounter = 10000;
+    int milliSecInterval= 750;
 
-    boolean isGameCompleted = false;
+    int difficutlySpeeds[] = {12000, 11000, 10000};
+
+    boolean flyButton1IsPressed, flyButton2IsPressed = false;
     boolean running = true;
 
     @Override
@@ -40,12 +44,30 @@ public class flyGameFragment extends Fragment {
 
         int difficulty = flyGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
 
-        move(difficulty,dpHeight,dpWidth);
+        if (difficulty == 3){
+            binding.flyButton2.setVisibility(View.VISIBLE);
+        }
+
+        ObjectAnimator animatorBug1 = createRandomMovingAnimator(difficulty, dpHeight, dpWidth, binding.flyButton);
+        ObjectAnimator animatorBug2 = createRandomMovingAnimator(difficulty, dpHeight, dpWidth, binding.flyButton2);
+        animatorBug1.setDuration(difficutlySpeeds[difficulty-1]);
+        animatorBug2.setDuration(difficutlySpeeds[difficulty-1]);
+        animatorBug1.start();
+        animatorBug2.start();
 
         binding.flyButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                isGameCompleted = true;
+                animatorBug1.end();
+                flyButton1IsPressed = true;
+            }
+        });
+
+        binding.flyButton2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                animatorBug2.cancel();
+                flyButton2IsPressed = true;
             }
         });
 
@@ -64,6 +86,14 @@ public class flyGameFragment extends Fragment {
                 i++;
                 running = false;
                 binding.minigameTimerBar.setProgress(0);
+                boolean isGameCompleted;
+
+                if (difficulty == 3){
+                    isGameCompleted = (flyButton1IsPressed && flyButton2IsPressed);
+                } else {
+                    isGameCompleted = flyButton1IsPressed;
+                }
+
                 NavDirections action = flyGameFragmentDirections.actionFlyGameFragmentToGameResultsFragment(isGameCompleted);
                 Navigation.findNavController(view).navigate(action);
             }
@@ -80,16 +110,16 @@ public class flyGameFragment extends Fragment {
         binding = null;
     }
 
-    public void move(int difficulty, float height, float width){
+    public ObjectAnimator createRandomMovingAnimator(int difficulty, float height, float width, ImageButton button){
         Path path = new Path();
         float w = randNum(width-500,0);
         float h = randNum(height-500,0);
+
         for(int i=0;i<30;i++){
             path.quadTo(w, h, w = randNum(width-500,0), h = randNum(height-500,0));
         }
-        ObjectAnimator animator = ObjectAnimator.ofFloat(binding.flyButton, View.X, View.Y, path);
-        animator.setDuration(7500/difficulty);
-        animator.start();
+
+        return ObjectAnimator.ofFloat(button, View.X, View.Y, path);
     }
 
     public int randNum(float min, float max) {

@@ -1,4 +1,4 @@
-package com.example.bootlegwarioware.OrderGame;
+package com.example.bootlegwarioware.games.OrderGame;
 
 import android.os.Bundle;
 
@@ -125,12 +125,6 @@ public class OrderGameFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-
     public boolean checkIfCorrect(String[] buttonKeywords, int i, ArrayList<String> answerCombo, boolean areButtonsDisabled){
         if (!areButtonsDisabled){
             if (viewModel.isElementInArray(answerCombo.get(i), buttonKeywords)){
@@ -183,5 +177,11 @@ public class OrderGameFragment extends Fragment {
         binding.heartButton.setEnabled(false);
         binding.clubButton.setEnabled(false);
         binding.spadeButton.setEnabled(false);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.bootlegwarioware.OrderGame;
+package com.example.bootlegwarioware.games.OrderGame;
 
 import androidx.lifecycle.ViewModel;
 

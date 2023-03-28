@@ -9,6 +9,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.os.CountDownTimer;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import android.view.animation.AnimationUtils;
 
 import com.example.bootlegwarioware.databinding.FragmentLoadingBinding;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class LoadingFragment extends Fragment {
@@ -32,21 +35,27 @@ public class LoadingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // The 2 arrays that shows the game of index j: game hint and NavDirection
-        NavDirections[] gameDestinations = new NavDirections[]{
-                LoadingFragmentDirections.actionLoadingFragmentToDemoGameFragment(
-                        ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed()),
-                LoadingFragmentDirections.actionLoadingFragmentToOrderGameFragment(
-                        ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed()),
-                LoadingFragmentDirections.actionLoadingFragmentToFlyGameFragment(
-                        ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())
-        };
+        // Create the list of pairs with
+        List<Pair<String, NavDirections>> gameList = new ArrayList<>();
 
-        String[] gameNames = new String[]{
-                "CLICK",
-                "ORDER",
-                "SWAT"
-        };
+//        gameList.add(new Pair<>("CLICK", LoadingFragmentDirections.actionLoadingFragmentToDemoGameFragment(
+//                ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
+        gameList.add(new Pair<>("ORDER", LoadingFragmentDirections.actionLoadingFragmentToOrderGameFragment(
+                ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
+        gameList.add(new Pair<>("SWAT", LoadingFragmentDirections.actionLoadingFragmentToFlyGameFragment(
+                ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
+        gameList.add(new Pair<>("FLIRT", LoadingFragmentDirections.actionLoadingFragmentToFlirtGameFragment(
+                ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
+        gameList.add(new Pair<>("GIVE", LoadingFragmentDirections.actionLoadingFragmentToShoppingGameFragment(
+                ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
+        gameList.add(new Pair<>("NOTHING", LoadingFragmentDirections.actionLoadingFragmentToNothingFragment(
+                ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
+        gameList.add(new Pair<>("BUILD STRENGTH", LoadingFragmentDirections.actionLoadingFragmentToStrengthGameFragment(
+                ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
+
+        Pair<String, NavDirections> bossGame = new Pair<>("DUEL",
+                LoadingFragmentDirections.actionLoadingFragmentToDuelGameFragment(
+                        ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed()));
 
         binding = FragmentLoadingBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
@@ -55,6 +64,7 @@ public class LoadingFragment extends Fragment {
         AnimationDrawable progressAnimation = (AnimationDrawable) binding.getRoot().getBackground();
         progressAnimation.start();
 
+        // Start Music
         final MediaPlayer nextGameMusic = MediaPlayer.create(getActivity(), R.raw.next_game_music);
         nextGameMusic.start();
 
@@ -64,10 +74,10 @@ public class LoadingFragment extends Fragment {
         binding.scoreTextView.setText(String.valueOf(((MainActivity)getContext()).getScore()));
 
         // Set up random game index and fill in
-        j = getRandomNumber(gameNames.length - 1);
+        j = getRandomNumber(gameList.size() - 1);
 
         // Run the game hint animation
-        binding.gameWordTextView.setText(gameNames[j]);
+        binding.gameWordTextView.setText(gameList.get(j).first);
         runAnimation();
 
         // Set-up and start the countdowntimer for the progress bar and timing
@@ -82,7 +92,7 @@ public class LoadingFragment extends Fragment {
             public void onFinish() {
                 i++;
                 binding.progressbar.setProgress(0);
-                Navigation.findNavController(view).navigate(gameDestinations[j]);
+                Navigation.findNavController(view).navigate(gameList.get(j).second);
             }
         };
 

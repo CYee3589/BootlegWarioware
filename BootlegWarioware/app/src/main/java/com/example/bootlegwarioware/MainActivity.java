@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /*
-Mobile App Development I -- COMP.4630 Honor Statement
+Mobile App Development II -- COMP.4630 Honor Statement
 The practice of good ethical behavior is essential for maintaining good order in the classroom,
 providing an enriching learning experience for students, and training as a practicing computing
 professional upon graduation. This practice is manifested in the University's Academic Integrity
@@ -18,16 +20,20 @@ otherwise specified. No outside help is permitted except the instructor and appr
 I certify that the work submitted with this assignment is mine and was generated in a manner
 consistent with this document, the course academic policy on the course website on Blackboard,
 and the UMass Lowell academic code.
-Date: 12/21/2022
-Name: Calvin Yee and Tony Choma
+
+Date: 3/27/2023
+Name: Calvin Yee
 */
 
 public class MainActivity extends AppCompatActivity {
 
     private int livesLeft = 4;
     private int score = 1;
-    private int difficulty = 1;
-    private int speed = 1;
+    private int difficulty = 1;         // difficutly runs from 1 to 3 (easy to difficuly)
+    private int speed = 1;              // speed runs from 1 to 5 (slowest to fastest)
+    private int currentIndex = 0;
+    private final int index = 6;
+    private int[] gameIndexes = {0, 1, 2, 3, 4, 5};
     private ArrayList<Integer> highscores = new ArrayList<Integer>();
 
     @Override
@@ -59,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         this.score = 1;
         this.difficulty = 1;
         this.speed = 1;
+        this.currentIndex = 0;
     }
 
 
@@ -90,6 +97,12 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean isGameOver(){
         return this.livesLeft == 0;
+    }
+
+    public void shuffleGameIndexes() {
+        int[] output = Arrays.copyOf(this.gameIndexes, this.gameIndexes.length);
+        Collections.shuffle(Arrays.asList(output));
+        this.gameIndexes = output;
     }
 
 }

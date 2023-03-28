@@ -23,11 +23,17 @@
     <string name="game_over">GAME OVER</string>
     <string name="countdownGO">GO</string>
 
-    <!--    Names of the Minigames-->
+    <!--    Names of the Microgame-->
     <string name="game_demo">DEMO Game</string>
     <string name="game_order">Order</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    BULK UP Microgame-->
+    <string name="prepare_to_duel">Prepare To Duel...</string>
+    <string name="DUEL">DUEL</string>
+    <string name="too_slow">TOO SLOW...</string>
+    <string name="too_fast">TOO FAST...</string>
 
 
 </resources>

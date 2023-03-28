@@ -5,8 +5,21 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".flyGameFragment">
+    tools:context=".games.FlyGame.flyGameFragment">
 
+
+    <ImageButton
+        android:id="@+id/flyButton2"
+        android:layout_width="101dp"
+        android:layout_height="101dp"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:src="@drawable/fly"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/flyButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/flyButton"
@@ -14,9 +27,9 @@
         android:layout_height="101dp"
         android:scaleType="fitXY"
         android:src="@drawable/fly"
-        android:contentDescription="press me"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/flyButton2"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

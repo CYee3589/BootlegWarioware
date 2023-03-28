@@ -14,17 +14,25 @@
         <entry key="app/src/main/res/drawable/order_game_status_light_correct.xml" value="0.1085" />
         <entry key="app/src/main/res/drawable/order_game_status_light_incorrect.xml" value="0.1085" />
         <entry key="app/src/main/res/drawable/round_button.xml" value="0.234" />
+        <entry key="app/src/main/res/drawable/strength_progressbar.xml" value="0.2635" />
         <entry key="app/src/main/res/drawable/triangle_button.xml" value="0.234" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3473731884057971" />
         <entry key="app/src/main/res/layout/fragment_demo_game.xml" value="0.3473731884057971" />
+        <entry key="app/src/main/res/layout/fragment_duel.xml" value="0.2421875" />
+        <entry key="app/src/main/res/layout/fragment_duel_game.xml" value="0.3858695652173913" />
+        <entry key="app/src/main/res/layout/fragment_flirt_game.xml" value="0.3067708333333333" />
+        <entry key="app/src/main/res/layout/fragment_fly_game.xml" value="0.3740942028985507" />
         <entry key="app/src/main/res/layout/fragment_game_over.xml" value="0.2930253623188406" />
         <entry key="app/src/main/res/layout/fragment_game_results.xml" value="0.30223846435546875" />
         <entry key="app/src/main/res/layout/fragment_high_score.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/layout/fragment_intro_countdown.xml" value="0.2930253623188406" />
         <entry key="app/src/main/res/layout/fragment_loading.xml" value="0.45986403313235963" />
-        <entry key="app/src/main/res/layout/fragment_order_game.xml" value="0.39875030517578125" />
+        <entry key="app/src/main/res/layout/fragment_nothing.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/fragment_order_game.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_results.xml" value="0.3473731884057971" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.29846014492753625" />
+        <entry key="app/src/main/res/layout/fragment_shopping_game.xml" value="0.3740942028985507" />
+        <entry key="app/src/main/res/layout/fragment_strength_game.xml" value="0.30885416666666665" />
         <entry key="app/src/main/res/layout/fragment_title.xml" value="0.3759564607039742" />
       </map>
     </option>

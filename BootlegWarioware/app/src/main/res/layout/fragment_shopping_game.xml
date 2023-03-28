@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontalguideline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontalguideline2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.34" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalguidelinehalf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalguidelinethirdleft"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalguidelinethirdright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.67" />
+
+
+    <LinearLayout
+        android:id="@+id/topRowTray"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/grey"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal|center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontalguideline">
+
+        <ImageView
+            android:id="@+id/candyTopLeft"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/order_game_clubs_unpressed" />
+
+        <ImageView
+            android:id="@+id/candyTopCenter"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/order_game_clubs_unpressed" />
+
+        <ImageView
+            android:id="@+id/candyTopRight"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/order_game_clubs_unpressed" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/midRowTray"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/grey"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topRowTray">
+
+        <ImageView
+            android:id="@+id/candyMidLeft"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/order_game_clubs_unpressed" />
+
+        <ImageView
+            android:id="@+id/candyMidCenter"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/order_game_clubs_unpressed" />
+
+        <ImageView
+            android:id="@+id/candyMidRight"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/order_game_clubs_unpressed" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lowerRowTray"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/grey"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/midRowTray">
+
+        <ImageView
+            android:id="@+id/candyLowerLeft"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/order_game_clubs_unpressed" />
+
+        <ImageView
+            android:id="@+id/candyLowerCenter"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/order_game_clubs_unpressed" />
+
+        <ImageView
+            android:id="@+id/candyLowerRight"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/order_game_clubs_unpressed" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hands"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/purple_500"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalguideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/verticalguidelinehalf"
+        app:layout_constraintTop_toTopOf="@+id/horizontalguideline2" />
+
+    <ProgressBar
+        android:id="@+id/minigameTimerBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
