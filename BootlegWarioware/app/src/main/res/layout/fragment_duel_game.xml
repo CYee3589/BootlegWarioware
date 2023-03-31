@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/duelGameFormat"
+    android:id="@+id/microgame_duel_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="screenTapped"
+    android:background="@drawable/microgame_duel_default"
     tools:context=".games.DuelGame.DuelGameFragment">
 
     <androidx.constraintlayout.widget.Guideline

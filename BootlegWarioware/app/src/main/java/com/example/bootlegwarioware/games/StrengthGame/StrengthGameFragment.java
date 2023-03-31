@@ -1,5 +1,6 @@
 package com.example.bootlegwarioware.games.StrengthGame;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -21,8 +22,8 @@ public class StrengthGameFragment extends Fragment {
 
     // Timer Progression Bar Variables
     int i = 0;
-    int milliSecCounter = 2500;
-    int milliSecInterval= 100;
+    int milliSecCounter = 10000;
+    int milliSecInterval= 1000;
 
     boolean isGameCompleted = false;
     int[] difficultyStrengthGoals = {10, 15, 20};
@@ -37,8 +38,14 @@ public class StrengthGameFragment extends Fragment {
         binding = FragmentStrengthGameBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        int difficulty = StrengthGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
-        int speed = StrengthGameFragmentArgs.fromBundle(requireArguments()).getSpeed();
+//        int difficulty = StrengthGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
+//        int speed = StrengthGameFragmentArgs.fromBundle(requireArguments()).getSpeed();
+
+        int difficulty = 1;
+
+        // Make animated hands animate
+        AnimationDrawable progressAnimation = (AnimationDrawable) binding.microgameStrengthBackground.getBackground();
+        progressAnimation.start();
 
         clickGoal = difficultyStrengthGoals[difficulty - 1];
         binding.powerProgressBar.setProgress(0);
@@ -54,9 +61,14 @@ public class StrengthGameFragment extends Fragment {
                 currentNumberOfClicks++;
                 System.out.println(currentNumberOfClicks);
                 binding.powerProgressBar.setProgress((100*currentNumberOfClicks)/clickGoal);
+
+                // Once the goal has been reached, switch to winning background, make strength bar and button invisable
                 if (currentNumberOfClicks == clickGoal){
                     isGameCompleted = true;
                     binding.strengthButton.setEnabled(false);
+                    binding.strengthButton.setVisibility(View.INVISIBLE);
+                    binding.powerProgressBar.setVisibility(View.INVISIBLE);
+                    binding.microgameStrengthBackground.setBackgroundResource(R.drawable.microgame_strength_win);
                 }
             }
         });

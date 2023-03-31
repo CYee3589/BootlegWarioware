@@ -25,7 +25,7 @@ public class DuelGameFragment extends Fragment {
     boolean isRightTimeToDuel = false;
     boolean isAlreadyPressed = false;
     boolean isTooEarly = true;
-    final long[] reactionTimeDifficutly = {4000, 3000, 1500};
+    final long[] reactionTimeDifficutly = {4000, 2500, 1000};
     int difficulty;
     View view;
 
@@ -36,30 +36,32 @@ public class DuelGameFragment extends Fragment {
         binding = FragmentDuelGameBinding.inflate(inflater, container, false);
         view = binding.getRoot();
 
-        difficulty = DuelGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
-//        difficulty = 1;
         int speed = DuelGameFragmentArgs.fromBundle(requireArguments()).getSpeed();
+        difficulty = DuelGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
+//        difficulty = 3;
 
         // At the beginning of the game, the player can't duel yet
-        binding.duelGameFormat.setEnabled(false);
+        binding.microgameDuelBackground.setEnabled(false);
 
         gameTimeline();
 
         // Once the player has tapped their screen,
-        binding.duelGameFormat.setOnClickListener(new View.OnClickListener() {
+        binding.microgameDuelBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isGameCompleted = isRightTimeToDuel;
                 isAlreadyPressed = true;
-                binding.duelGameFormat.setClickable(false);
+                binding.microgameDuelBackground.setClickable(false);
+                binding.duelText.setVisibility(View.INVISIBLE);
 
                 System.out.println("Game Status: " + isGameCompleted);
 
                 // If the click was too early,
                 if (isTooEarly){
                     tooEarly();
+                } else if (isGameCompleted) {
+                    wonDuel();
                 }
-
             }
         });
 
@@ -77,11 +79,11 @@ public class DuelGameFragment extends Fragment {
     public void endWarning(){
 //        int i = randomLongGenerator(3000, 10000);
 //        System.out.println("Reaction TIme: " + i);
-        long reactionTime = new Long(randomLongGenerator(3000, 10000));
+        long reactionTime = new Long(randomIntGenerator(3000, 10000));
         System.out.println("Reaction TIme: " + reactionTime);
 
         binding.duelText.setVisibility(getView().INVISIBLE);
-        binding.duelGameFormat.setEnabled(true);
+        binding.microgameDuelBackground.setEnabled(true);
 
         // Wait 3-10 seconds, then start the duel
         (new Handler()).postDelayed(this::startDuel, reactionTime);
@@ -97,31 +99,35 @@ public class DuelGameFragment extends Fragment {
             binding.duelText.setVisibility(getView().VISIBLE);
             isRightTimeToDuel = true;
 
-            // Wait for reaction time to end, then end the duel
+            // Wait for reaction time to end, then times up.
             (new Handler()).postDelayed(this::timesUp, reactionTimeDifficutly[difficulty - 1]);
         }
     }
 
-    // The duel has ended, thus: Times up. Change the background to too late and then
+    // Times up. Change the background to too late, wait for 3 seconds, and exit game
     public void timesUp(){
         if(!isAlreadyPressed) {
             binding.duelText.setVisibility(getView().INVISIBLE);
-
-
-
             isRightTimeToDuel = false;
+            binding.microgameDuelBackground.setBackgroundResource(R.drawable.microgame_duel_lose_late);
+            (new Handler()).postDelayed(this::exitGame, 3000);
         }
     }
 
-    public int randomLongGenerator(int lowerBound, int upperBound){
+    public int randomIntGenerator(int lowerBound, int upperBound){
         Random random = new Random();
         return lowerBound + random.nextInt(upperBound - lowerBound);
     }
 
-    // If the click was too early, give them the too early sceen and
+    // If the click was too early, give them the too early screen and end microgame
     public void tooEarly(){
+        binding.microgameDuelBackground.setBackgroundResource(R.drawable.microgame_duel_lose_early);
+        (new Handler()).postDelayed(this::exitGame, 3000);
+    }
 
-
+    // If the click was too early, give them the too early screen and end microgame
+    public void wonDuel(){
+        binding.microgameDuelBackground.setBackgroundResource(R.drawable.microgame_duel_win);
         (new Handler()).postDelayed(this::exitGame, 3000);
     }
 

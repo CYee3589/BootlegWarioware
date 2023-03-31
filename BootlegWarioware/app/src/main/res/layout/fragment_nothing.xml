@@ -3,8 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/microgame_nothing_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/microgame_nothing_default"
     tools:context=".games.NothingGame.NothingFragment">
 
 
@@ -15,15 +17,18 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
-    <Button
+    <ImageButton
         android:id="@+id/nuke_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70sp"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="50sp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/nuke_button_unpressed"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline10"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
     <ProgressBar
         android:id="@+id/minigameTimerBar"

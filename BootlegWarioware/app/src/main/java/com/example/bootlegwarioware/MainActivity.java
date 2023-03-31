@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /*
-Mobile App Development II -- COMP.4630 Honor Statement
+Mobile App Development II -- COMP.4631 Honor Statement
 The practice of good ethical behavior is essential for maintaining good order in the classroom,
 providing an enriching learning experience for students, and training as a practicing computing
 professional upon graduation. This practice is manifested in the University's Academic Integrity
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private int difficulty = 1;         // difficutly runs from 1 to 3 (easy to difficuly)
     private int speed = 1;              // speed runs from 1 to 5 (slowest to fastest)
     private int currentIndex = 0;
-    private final int index = 6;
+    private final int gameIndexSize = 6;
     private int[] gameIndexes = {0, 1, 2, 3, 4, 5};
     private ArrayList<Integer> highscores = new ArrayList<Integer>();
 
@@ -81,9 +81,11 @@ public class MainActivity extends AppCompatActivity {
         return this.difficulty;
     }
 
-    public int getSpeed(){
-        return this.speed;
-    }
+    public int getSpeed() { return this.speed; }
+
+    public int getCurrentIndex() { return this.currentIndex; }
+
+    public int getGameIndexSize() { return this.gameIndexSize; }
 
     public ArrayList<Integer> getHighScores() { return this.highscores; }
 
@@ -94,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
     public void incrementScore(){
         this.score += 1;
     }
+
+    public void incrementCurrentIndex(){
+        this.currentIndex += 1;
+    }
+
 
     public boolean isGameOver(){
         return this.livesLeft == 0;

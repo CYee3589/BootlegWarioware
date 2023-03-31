@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,7 @@ import android.widget.LinearLayout;
 
 import com.example.bootlegwarioware.DemoGameFragmentArgs;
 import com.example.bootlegwarioware.DemoGameFragmentDirections;
+import com.example.bootlegwarioware.R;
 import com.example.bootlegwarioware.databinding.FragmentShoppingGameBinding;
 import com.example.bootlegwarioware.games.OrderGame.OrderGameViewModel;
 
@@ -45,17 +47,24 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
         View view = binding.getRoot();
 
         difficulty = ShoppingGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
-//        difficulty = 1;
         speed = ShoppingGameFragmentArgs.fromBundle(requireArguments()).getSpeed();
+//        difficulty = 3;
 
-        // Get the
+        // Make animated hands animate
+        AnimationDrawable progressAnimation = (AnimationDrawable) binding.hands.getBackground();
+        progressAnimation.start();
+
+        // Get the strings that are outputed in this model
         implementListeners(difficulty);
         for (String str: viewModel.masterCandyList){
             System.out.println(str);
         }
 
-        // Choose which candy is the answer randomly
+        // Choose which candy of choice randomly, then fit the candyOfChoice image with said candy
         viewModel.candyOfChoice = viewModel.masterCandyList[new Random().nextInt(viewModel.masterCandyList.length)];
+
+
+        binding.candyOfChoice.setImageResource(getDrawableID(viewModel.candyOfChoice));
         System.out.println("candyOfChoice: " + viewModel.candyOfChoice);
 
         binding.minigameTimerBar.setProgress(100);
@@ -128,7 +137,35 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
         binding.hands.setOnDragListener(this);
     }
 
+    private int getDrawableID(String candyName){
+        switch (candyName){
+            case "CANDY_TOP_LEFT":
+                return R.drawable.candy_1;
+            case "CANDY_TOP_CENTER":
+                return R.drawable.candy_2;
+            case "CANDY_TOP_RIGHT":
+                return R.drawable.candy_3;
+            case "CANDY_MID_LEFT":
+                return R.drawable.candy_4;
+            case "CANDY_MID_CENTER":
+                return R.drawable.candy_5;
+            case "CANDY_MID_RIGHT":
+                return R.drawable.candy_6;
+            case "CANDY_LOWER_LEFT":
+                return R.drawable.candy_7;
+            case "CANDY_LOWER_CENTER":
+                return R.drawable.candy_8;
+            case "CANDY_LOWER_RIGHT":
+                return R.drawable.candy_9;
+            default:
+                return R.drawable.fly;
+        }
+    };
+
+    // Disable all candies and switch up backgrounds
     boolean isCorrectCandy(String guess, String answer, int difficulty){
+
+        // Disable all known candies
         switch (difficulty) {
             case 3:
                 binding.candyLowerLeft.setEnabled(false);
@@ -146,8 +183,18 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
                 break;
         }
 
+        boolean results = Objects.equals(guess, answer);
+        binding.candyOfChoice.setVisibility(View.INVISIBLE);
+
+        // Change the background based on results
+        if (results){
+            binding.microgameShoppingBackground.setBackgroundResource(R.drawable.microgame_shopping_win);
+        } else {
+            binding.microgameShoppingBackground.setBackgroundResource(R.drawable.microgame_shopping_lose);
+        }
         System.out.println("GAME RESULTS: " + Objects.equals(guess, answer));
-        return Objects.equals(guess, answer);
+
+        return results;
     }
 
     // This is the method that the system calls when it dispatches a drag event to the
@@ -184,8 +231,6 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
                 // Applies a MAGENTA or any color tint to the View,
                 // Return true; the return value is ignored.
 
-                view.getBackground().setColorFilter(Color.MAGENTA, PorterDuff.Mode.SRC_IN);
-
                 // Invalidate the view to force a redraw in the new tint
                 view.invalidate();
 
@@ -201,9 +246,6 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
                 // Re-sets the color tint to blue, if you had set the BLUE color or any color in ACTION_DRAG_STARTED. Returns true; the return value is ignored.
 
                 //  view.getBackground().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
-
-                //If u had not provided any color in ACTION_DRAG_STARTED then clear color filter.
-                view.getBackground().clearColorFilter();
 
                 // Invalidate the view to force a redraw in the new tint
                 view.invalidate();
@@ -221,9 +263,6 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
                 // Displays a message containing the dragged data.
 //                Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
                 System.out.println("Dragged Data: " + dragData);
-
-                // Turns off any color tints
-                view.getBackground().clearColorFilter();
 
                 // Invalidates the view to force a redraw
                 view.invalidate();
@@ -250,9 +289,6 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
                 return true;
 
             case DragEvent.ACTION_DRAG_ENDED:
-
-                // Turns off any color tinting
-                view.getBackground().clearColorFilter();
 
                 // Invalidates the view to force a redraw
                 view.invalidate();

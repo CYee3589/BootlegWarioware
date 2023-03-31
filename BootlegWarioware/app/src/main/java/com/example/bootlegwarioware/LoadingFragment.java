@@ -74,10 +74,17 @@ public class LoadingFragment extends Fragment {
         binding.scoreTextView.setText(String.valueOf(((MainActivity)getContext()).getScore()));
 
         // Set up random game index and fill in
-        j = getRandomNumber(gameList.size() - 1);
+//        j = getRandomNumber(gameList.size() - 1);
+        j = ((MainActivity)getContext()).getCurrentIndex();
+
+        // Show the hint
+        if(j == ((MainActivity)getContext()).getGameIndexSize()){
+            binding.gameWordTextView.setText(bossGame.first);
+        } else {
+            binding.gameWordTextView.setText(gameList.get(j).first);
+        }
 
         // Run the game hint animation
-        binding.gameWordTextView.setText(gameList.get(j).first);
         runAnimation();
 
         // Set-up and start the countdowntimer for the progress bar and timing
@@ -90,9 +97,14 @@ public class LoadingFragment extends Fragment {
 
             @Override
             public void onFinish() {
-                i++;
+                ((MainActivity)getContext()).incrementCurrentIndex();
                 binding.progressbar.setProgress(0);
-                Navigation.findNavController(view).navigate(gameList.get(j).second);
+                if(j == ((MainActivity)getContext()).getGameIndexSize()){
+                    Navigation.findNavController(view).navigate(bossGame.second);
+                } else {
+                    i++;
+                    Navigation.findNavController(view).navigate(gameList.get(j).second);
+                }
             }
         };
 

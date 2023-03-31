@@ -3,8 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/microgame_strength_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/microgame_strength_default"
     tools:context=".games.StrengthGame.StrengthGameFragment">
 
 
@@ -31,15 +33,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/strength_button"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Click Me!"
+        android:src="@drawable/strength_button"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
 
     <ProgressBar
         android:id="@+id/minigameTimerBar"

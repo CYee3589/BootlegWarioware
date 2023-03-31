@@ -34,6 +34,7 @@ public class OrderGameFragment extends Fragment {
 
         int difficulty = OrderGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
         int speed = OrderGameFragmentArgs.fromBundle(requireArguments()).getSpeed();
+//        int difficulty = 3;
 
         // Display the 5th light if difficulty is 3/hard
         if (difficulty == 1 || difficulty == 2){
@@ -48,14 +49,7 @@ public class OrderGameFragment extends Fragment {
         binding.clubButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(checkIfCorrect(new String[]{"CLUB", "GREEN"}, viewModel.i, answerCombo, viewModel.areButtonsDisabled)){
-                    viewModel.i += 1;
-                    if(isGameCompleted(viewModel.i, difficulty)){
-                        viewModel.isGameCleared = true;
-                    }
-                } else {
-                    viewModel.areButtonsDisabled = true;
-                }
+                buttonProcedure(new String[]{"CLUB", "GREEN"}, answerCombo, difficulty);
             }
         });
 
@@ -63,14 +57,7 @@ public class OrderGameFragment extends Fragment {
         binding.heartButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(checkIfCorrect(new String[]{"HEART", "RED"}, viewModel.i, answerCombo, viewModel.areButtonsDisabled)){
-                    viewModel.i += 1;
-                    if(isGameCompleted(viewModel.i, difficulty)){
-                        viewModel.isGameCleared = true;
-                    }
-                } else {
-                    viewModel.areButtonsDisabled = true;
-                }
+                buttonProcedure(new String[]{"HEART", "RED"}, answerCombo, difficulty);
             }
         });
 
@@ -78,14 +65,7 @@ public class OrderGameFragment extends Fragment {
         binding.diamondButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(checkIfCorrect(new String[]{"DIAMOND", "BLUE"}, viewModel.i, answerCombo, viewModel.areButtonsDisabled)){
-                    viewModel.i += 1;
-                    if(isGameCompleted(viewModel.i, difficulty)){
-                        viewModel.isGameCleared = true;
-                    }
-                } else {
-                    viewModel.areButtonsDisabled = true;
-                }
+                buttonProcedure(new String[]{"DIAMOND", "BLUE"}, answerCombo, difficulty);
             }
         });
 
@@ -93,14 +73,7 @@ public class OrderGameFragment extends Fragment {
         binding.spadeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(checkIfCorrect(new String[]{"SPADE", "YELLOW"}, viewModel.i, answerCombo, viewModel.areButtonsDisabled)){
-                    viewModel.i += 1;
-                    if(isGameCompleted(viewModel.i, difficulty)){
-                        viewModel.isGameCleared = true;
-                    }
-                } else {
-                    viewModel.areButtonsDisabled = true;
-                }
+                buttonProcedure(new String[]{"SPADE", "YELLOW"}, answerCombo, difficulty);
             }
         });
 
@@ -123,6 +96,18 @@ public class OrderGameFragment extends Fragment {
         countDown.start();
 
         return view;
+    }
+
+    public void buttonProcedure(String[] buttonKeywords, ArrayList<String> answerCombo, int difficulty){
+        if(checkIfCorrect(buttonKeywords, viewModel.i, answerCombo, viewModel.areButtonsDisabled)){
+            viewModel.i += 1;
+            if(isGameCompleted(viewModel.i, difficulty)){
+                viewModel.isGameCleared = true;
+                binding.microgameOrderBackground.setBackgroundResource(R.drawable.microgame_order_win);
+            }
+        } else {
+            viewModel.areButtonsDisabled = true;
+        }
     }
 
     public boolean checkIfCorrect(String[] buttonKeywords, int i, ArrayList<String> answerCombo, boolean areButtonsDisabled){
@@ -177,6 +162,8 @@ public class OrderGameFragment extends Fragment {
         binding.heartButton.setEnabled(false);
         binding.clubButton.setEnabled(false);
         binding.spadeButton.setEnabled(false);
+        binding.microgameOrderBackground.setBackgroundResource(R.drawable.microgame_order_lose);
+
     }
 
     @Override

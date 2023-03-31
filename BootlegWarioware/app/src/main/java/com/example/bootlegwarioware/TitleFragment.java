@@ -29,10 +29,12 @@ public class TitleFragment extends Fragment {
         titleMusic.setLooping(true);
         titleMusic.start();
 
+        // Once the play button is clicked, stop music, shuffle the game indexes, and move to the countdown funciton
         binding.playButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 titleMusic.stop();
+                ((MainActivity)getContext()).shuffleGameIndexes();
                 NavDirections action = TitleFragmentDirections.actionTitleFragmentToIntroCountdownFragment();
                 Navigation.findNavController(view).navigate(action);
             }

@@ -2,6 +2,7 @@ package com.example.bootlegwarioware.games.FlyGame;
 
 import android.animation.ObjectAnimator;
 import android.graphics.Path;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.bootlegwarioware.R;
 import com.example.bootlegwarioware.databinding.FragmentFlyGameBinding;
 
 
@@ -25,10 +27,11 @@ public class flyGameFragment extends Fragment {
 
     int i = 0;
     int milliSecCounter = 10000;
-    int milliSecInterval= 750;
+    int milliSecInterval= 1000;
 
     int difficutlySpeeds[] = {12000, 11000, 10000};
 
+    boolean isGameCompleted = false;
     boolean flyButton1IsPressed, flyButton2IsPressed = false;
     boolean running = true;
 
@@ -38,11 +41,17 @@ public class flyGameFragment extends Fragment {
         binding = FragmentFlyGameBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        int difficulty = flyGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
+//        int difficulty = 1;
+
+        // Make animated background animate
+        AnimationDrawable progressAnimation = (AnimationDrawable) binding.microgameFlyBackground.getBackground();
+        progressAnimation.start();
+
         DisplayMetrics displayMetrics = view.getResources().getDisplayMetrics();
         float dpHeight = displayMetrics.heightPixels;
         float dpWidth = displayMetrics.widthPixels;
 
-        int difficulty = flyGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
 
         if (difficulty == 3){
             binding.flyButton2.setVisibility(View.VISIBLE);
@@ -55,19 +64,25 @@ public class flyGameFragment extends Fragment {
         animatorBug1.start();
         animatorBug2.start();
 
+        // Set functionality for fly button 1
         binding.flyButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                animatorBug1.end();
+                animatorBug1.cancel();
+                binding.flyButton.setBackgroundResource(R.drawable.fly_splat);
                 flyButton1IsPressed = true;
+                isGameCompleted = checkIfAllBugsAreDead(difficulty);
             }
         });
 
+        // Set functionality for fly button 2
         binding.flyButton2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 animatorBug2.cancel();
+                binding.flyButton2.setImageResource(R.drawable.fly_splat);
                 flyButton2IsPressed = true;
+                isGameCompleted = checkIfAllBugsAreDead(difficulty);
             }
         });
 
@@ -86,13 +101,6 @@ public class flyGameFragment extends Fragment {
                 i++;
                 running = false;
                 binding.minigameTimerBar.setProgress(0);
-                boolean isGameCompleted;
-
-                if (difficulty == 3){
-                    isGameCompleted = (flyButton1IsPressed && flyButton2IsPressed);
-                } else {
-                    isGameCompleted = flyButton1IsPressed;
-                }
 
                 NavDirections action = flyGameFragmentDirections.actionFlyGameFragmentToGameResultsFragment(isGameCompleted);
                 Navigation.findNavController(view).navigate(action);
@@ -108,6 +116,23 @@ public class flyGameFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public boolean checkIfAllBugsAreDead(int difficulty){
+        boolean results;
+
+        if (difficulty == 3){
+            results = flyButton1IsPressed && flyButton2IsPressed;
+        } else {
+            results = flyButton1IsPressed;
+        }
+
+        // If game is completed, show the win background
+        if (results){
+            binding.microgameFlyBackground.setBackgroundResource(R.drawable.microgame_fly_win);
+        }
+
+        return results;
     }
 
     public ObjectAnimator createRandomMovingAnimator(int difficulty, float height, float width, ImageButton button){

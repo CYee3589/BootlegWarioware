@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
+    android:id="@+id/microgame_fly_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/microgame_fly_default"
     tools:context=".games.FlyGame.flyGameFragment">
 
 
@@ -14,7 +15,7 @@
         android:layout_height="101dp"
         android:scaleType="fitXY"
         android:visibility="gone"
-        android:src="@drawable/fly"
+        android:background="@drawable/fly"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -26,7 +27,7 @@
         android:layout_width="101dp"
         android:layout_height="101dp"
         android:scaleType="fitXY"
-        android:src="@drawable/fly"
+        android:background="@drawable/fly"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/flyButton2"
         app:layout_constraintHorizontal_bias="0.5"

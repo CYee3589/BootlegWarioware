@@ -69,8 +69,8 @@ public class GameResultsFragment extends Fragment {
                 i++;
                 binding.progressbar.setProgress(0);
 
-                // Check if Game Over, otherwise continue with the game
-                if (((MainActivity)getContext()).isGameOver()){
+                // Check if Game Over or if Story mode is complete, otherwise continue with the game
+                if (((MainActivity)getContext()).isGameOver() || (((MainActivity)getContext()).getCurrentIndex() == ((MainActivity)getContext()).getGameIndexSize() + 1)){
                     binding.gameOverTextView.setText(R.string.game_over);
                     runGameOverAnimation();
                     final MediaPlayer gameOverMusic =  MediaPlayer.create(getActivity(), R.raw.game_over_music);

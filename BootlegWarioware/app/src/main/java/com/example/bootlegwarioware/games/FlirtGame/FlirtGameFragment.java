@@ -31,8 +31,8 @@ public class FlirtGameFragment extends Fragment {
 
     // Timer Progression Bar Variables
     int i = 0;
-    int milliSecCounter = 2500;
-    int milliSecInterval= 100;
+    int milliSecCounter = 10000;
+    int milliSecInterval= 1000;
 
     boolean isGameCompleted = false;
 
@@ -43,8 +43,9 @@ public class FlirtGameFragment extends Fragment {
         View view = binding.getRoot();
 
         int difficulty = FlirtGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
-//        int difficulty = 3;
         int speed = FlirtGameFragmentArgs.fromBundle(requireArguments()).getSpeed();
+//        int difficulty = 3;
+
 
         // Intialize all buttons based on difficulty
         setButtonsWithDifficulty(difficulty);
@@ -98,6 +99,7 @@ public class FlirtGameFragment extends Fragment {
             }
         };
 
+        countDown.start();
 
         // Inflate the layout for this fragment
         return view;
@@ -152,7 +154,15 @@ public class FlirtGameFragment extends Fragment {
 
         isGameCompleted = Objects.equals(correctDifficultyWords[difficulty - 1], buttonText);
         System.out.println("ANSWER: " + isGameCompleted);
-        return Objects.equals(correctDifficultyWords[difficulty - 1], buttonText);
+
+        // Change the background based on results
+        if (isGameCompleted){
+            binding.microgameFlirtBackground.setBackgroundResource(R.drawable.microgame_flirt_win);
+        } else {
+            binding.microgameFlirtBackground.setBackgroundResource(R.drawable.microgame_flirt_lose);
+        }
+
+        return isGameCompleted;
     }
 
     @Override
