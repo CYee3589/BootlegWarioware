@@ -5,6 +5,7 @@ import android.content.ClipDescription;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -50,23 +51,24 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
         speed = ShoppingGameFragmentArgs.fromBundle(requireArguments()).getSpeed();
 //        difficulty = 3;
 
-        // Make animated hands animate
+        // Start animation for animated hands
         AnimationDrawable progressAnimation = (AnimationDrawable) binding.hands.getBackground();
         progressAnimation.start();
 
         // Get the strings that are outputed in this model
         implementListeners(difficulty);
-        for (String str: viewModel.masterCandyList){
-            System.out.println(str);
-        }
+//        for (String str: viewModel.masterCandyList){
+//            System.out.println(str);
+//        }
 
         // Choose which candy of choice randomly, then fit the candyOfChoice image with said candy
         viewModel.candyOfChoice = viewModel.masterCandyList[new Random().nextInt(viewModel.masterCandyList.length)];
 
-
+        // Set the candyOfChoice imageView with appropriate drawable
         binding.candyOfChoice.setImageResource(getDrawableID(viewModel.candyOfChoice));
-        System.out.println("candyOfChoice: " + viewModel.candyOfChoice);
+//        System.out.println("candyOfChoice: " + viewModel.candyOfChoice);
 
+        // Timer Bar
         binding.minigameTimerBar.setProgress(100);
         CountDownTimer countDown = new CountDownTimer(viewModel.milliSecCounter, viewModel.milliSecInterval) {
             @Override
@@ -89,7 +91,7 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
         return view;
     }
 
-    //Implement long click and drag listener
+    //Implement long click and drag listeners based on difficutly
     private void implementListeners(int difficulty) {
 
         // Set the top row tray and candy with their listeners
@@ -102,6 +104,7 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
         binding.topRowTray.setOnDragListener(this);
 
         switch (difficulty){
+            // If difficutly is 3/hard, set the lower row tray and candy with their listeners
             case 3:
                 binding.candyLowerLeft.setTag("CANDY_LOWER_LEFT");
                 binding.candyLowerLeft.setOnLongClickListener(this);
@@ -112,6 +115,7 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
                 binding.lowerRowTray.setOnDragListener(this);
                 viewModel.masterCandyList = viewModel.stringArrayCombine(viewModel.masterCandyList, viewModel.additionalHardDifficultyList);
 
+            // If difficutly is 2/medium or 3/hard, set the mid row tray and candy with their listeners
             case 2:
                 binding.candyMidLeft.setTag("CANDY_MID_LEFT");
                 binding.candyMidLeft.setOnLongClickListener(this);
@@ -122,11 +126,13 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
                 binding.midRowTray.setOnDragListener(this);
                 viewModel.masterCandyList = viewModel.stringArrayCombine(viewModel.masterCandyList, viewModel.additionalMediumDifficultyList);
 
+                // If difficutly is 2/medium, set the low tray as GONE
                 if(difficulty == 2){
                     binding.lowerRowTray.setVisibility(View.GONE);
                 }
                 break;
 
+            // If difficulty is 1/easy, set the low and mid tray as GONE
             case 1:
             default:
                 binding.midRowTray.setVisibility(View.GONE);
@@ -137,6 +143,7 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
         binding.hands.setOnDragListener(this);
     }
 
+    // Given the draggable objects name, return the drawable ID
     private int getDrawableID(String candyName){
         switch (candyName){
             case "CANDY_TOP_LEFT":
@@ -189,10 +196,14 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
         // Change the background based on results
         if (results){
             binding.microgameShoppingBackground.setBackgroundResource(R.drawable.microgame_shopping_win);
+            final MediaPlayer correct = MediaPlayer.create(getActivity(), R.raw.correct_sound_effect);
+            correct.start();
         } else {
             binding.microgameShoppingBackground.setBackgroundResource(R.drawable.microgame_shopping_lose);
+            final MediaPlayer incorrect = MediaPlayer.create(getActivity(), R.raw.incorrect_sound_effect);
+            incorrect.start();
         }
-        System.out.println("GAME RESULTS: " + Objects.equals(guess, answer));
+//        System.out.println("GAME RESULTS: " + Objects.equals(guess, answer));
 
         return results;
     }
@@ -261,8 +272,7 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
                 String dragData = item.getText().toString();
 
                 // Displays a message containing the dragged data.
-//                Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
-                System.out.println("Dragged Data: " + dragData);
+//                System.out.println("Dragged Data: " + dragData);
 
                 // Invalidates the view to force a redraw
                 view.invalidate();
@@ -276,7 +286,7 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
 
                 String fullName = getResources().getResourceName(view.getId());
                 dropOffLocation = fullName.substring(fullName.lastIndexOf("/") + 1);
-                System.out.println("DROPPED LOCATION: " + dropOffLocation);
+//                System.out.println("DROPPED LOCATION: " + dropOffLocation);
 
                 // If the dropped location is "hands", then check if its the correct candy
                 if(Objects.equals(dropOffLocation, "hands")){
@@ -301,12 +311,10 @@ public class ShoppingGameFragment extends Fragment implements View.OnDragListene
 
                 // invoke getResult(), and displays what happened.
                 if (dragEvent.getResult()) {
-//                    Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                    System.out.println("The drop was handled.");
+//                    System.out.println("The drop was handled.");
 
                 } else {
-//                    Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_SHORT).show();
-                    System.out.println("The drop didn't work.");
+//                    System.out.println("The drop didn't work.");
                 }
 
 

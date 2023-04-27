@@ -26,14 +26,19 @@ public class GameOverFragment extends Fragment {
         binding = FragmentGameOverBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        // Get the overall score and set it to the resultsTextView
         int finalScore = GameOverFragmentArgs.fromBundle(requireArguments()).getScore();
         addHighScore(finalScore);
-
         binding.resultsTextView.setText(String.valueOf(finalScore));
 
-        // Reset game integers
-        ((MainActivity)getContext()).setBackToNormal();
+        // Reset game integers, based on weither its story or endless mode
+        if (((MainActivity)getContext()).getIsStoryMode()){
+            ((MainActivity)getContext()).setBackToNormalStory();
+        } else {
+            ((MainActivity)getContext()).setBackToNormalEndless();
+        }
 
+        // When clicked, you will go back to the title screen
         binding.returnToTitleButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -42,6 +47,7 @@ public class GameOverFragment extends Fragment {
             }
         });
 
+        // When clicked, you start the game all over again
         binding.retryButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -50,21 +56,21 @@ public class GameOverFragment extends Fragment {
             }
         });
 
-
         // Inflate the layout for this fragment
         return view;
+    }
+
+    // Publishes your score to the highscore
+    public void addHighScore(int score){
+        ArrayList<Integer> highscores = ((MainActivity)getContext()).getHighScores();
+        highscores.add(score);
+        Collections.sort(highscores,Collections.reverseOrder());
+        ((MainActivity)getContext()).setHighscores(highscores);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    public void addHighScore(int score){
-        ArrayList<Integer> highscores = ((MainActivity)getContext()).getHighScores();
-        highscores.add(score);
-        Collections.sort(highscores,Collections.reverseOrder());
-        ((MainActivity)getContext()).setHighscores(highscores);
     }
 }

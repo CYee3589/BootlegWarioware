@@ -1,5 +1,6 @@
 package com.example.bootlegwarioware.games.FlirtGame;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,10 +24,11 @@ public class FlirtGameFragment extends Fragment {
 
     private FragmentFlirtGameBinding binding;
 
+    // List of prompts and correct prompts
+    // Difficulty is based on number of prompts given
     final String[][] difficultyWords = {{"YOU'RE CUTE", "YOU'RE UGLY"},
             {"YOU'RE BEAUTIFUL", "YOU'RE ADOPTED", "YOU'RE DISGUSTING", "YOU'RE UNSIGHTLY"},
             {"YOU'RE RAVISHING", "YOU'RE REPULSIVE", "YOU'RE RAUNCHY", "YOU'RE RUTHLESS", "YOU'RE RIDICULOUS", "YOU'RE RANCOROUS"}};
-
     final String[] correctDifficultyWords = {"YOU'RE CUTE", "YOU'RE BEAUTIFUL", "YOU'RE RAVISHING"};
 
     // Timer Progression Bar Variables
@@ -82,6 +84,7 @@ public class FlirtGameFragment extends Fragment {
         });
 
 
+        // Timer bar
         binding.minigameTimerBar.setProgress(100);
         CountDownTimer countDown = new CountDownTimer(milliSecCounter,milliSecInterval) {
             @Override
@@ -105,13 +108,17 @@ public class FlirtGameFragment extends Fragment {
         return view;
     }
 
+    // Initialize all buttons based on difficulty
     public void setButtonsWithDifficulty(int difficulty){
         String[] words = difficultyWords[difficulty - 1];
         words = shuffle(words);
+
+        // Make buttons have text or make them INVISIBLE based on difficulty
         switch (difficulty){
             case 3:
                 binding.button5.setText(words[4]);
                 binding.button6.setText(words[5]);
+
             case 2:
                 binding.button3.setText(words[2]);
                 binding.button4.setText(words[3]);
@@ -133,12 +140,14 @@ public class FlirtGameFragment extends Fragment {
 
     }
 
+    // Randomize a string array
     public String[] shuffle(String[] input) {
         String[] output = Arrays.copyOf(input, input.length);
         Collections.shuffle(Arrays.asList(output));
         return output;
     }
 
+    // Once the player clicks on a button, disable all other buttons, and check if the prompt on that button is correct or not
     public boolean checkIfCorrectAnswer(View v, int difficulty){
         Button b = (Button)v;
         String buttonText = b.getText().toString();
@@ -158,8 +167,12 @@ public class FlirtGameFragment extends Fragment {
         // Change the background based on results
         if (isGameCompleted){
             binding.microgameFlirtBackground.setBackgroundResource(R.drawable.microgame_flirt_win);
+            final MediaPlayer correct = MediaPlayer.create(getActivity(), R.raw.correct_sound_effect);
+            correct.start();
         } else {
             binding.microgameFlirtBackground.setBackgroundResource(R.drawable.microgame_flirt_lose);
+            final MediaPlayer incorrect = MediaPlayer.create(getActivity(), R.raw.incorrect_sound_effect);
+            incorrect.start();
         }
 
         return isGameCompleted;

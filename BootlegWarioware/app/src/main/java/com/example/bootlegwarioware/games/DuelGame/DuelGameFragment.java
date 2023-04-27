@@ -1,5 +1,6 @@
 package com.example.bootlegwarioware.games.DuelGame;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -25,30 +26,32 @@ public class DuelGameFragment extends Fragment {
     boolean isRightTimeToDuel = false;
     boolean isAlreadyPressed = false;
     boolean isTooEarly = true;
-    final long[] reactionTimeDifficutly = {4000, 2500, 1000};
+    final long[] reactionTimeDifficutly = {4000, 2500, 1000};       // difficulty is based on reaction time (in milliseconds)
     int difficulty;
     View view;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         binding = FragmentDuelGameBinding.inflate(inflater, container, false);
         view = binding.getRoot();
-
         int speed = DuelGameFragmentArgs.fromBundle(requireArguments()).getSpeed();
         difficulty = DuelGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
 //        difficulty = 3;
 
-        // At the beginning of the game, the player can't duel yet
+        // At the very beginning of the game, clicking the screen will do nothing
         binding.microgameDuelBackground.setEnabled(false);
 
+        // Start the game timeline
         gameTimeline();
 
-        // Once the player has tapped their screen,
+        // Once the player has tapped their screen, determine if its too early or just right
         binding.microgameDuelBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final MediaPlayer gunFire = MediaPlayer.create(getActivity(), R.raw.gun_sound_effect);
+                gunFire.start();
                 isGameCompleted = isRightTimeToDuel;
                 isAlreadyPressed = true;
                 binding.microgameDuelBackground.setClickable(false);
@@ -69,18 +72,21 @@ public class DuelGameFragment extends Fragment {
         return view;
     }
 
-    // Time line of the entire game.
+    // Start the Time line of the entire game.
     public void gameTimeline(){
+        final MediaPlayer startingMusic = MediaPlayer.create(getActivity(), R.raw.start_duel_sound);
+        startingMusic.start();
+
         // Wait 3 seconds, then end the forewarning
         (new Handler()).postDelayed(this::endWarning, 3000);
     }
 
-    // Erase the forewarning from the duel format, and have the screen clickable
+    // Erase the forewarning message, and set the screen clickable
     public void endWarning(){
 //        int i = randomLongGenerator(3000, 10000);
 //        System.out.println("Reaction TIme: " + i);
         long reactionTime = new Long(randomIntGenerator(3000, 10000));
-        System.out.println("Reaction TIme: " + reactionTime);
+//        System.out.println("Reaction Time: " + reactionTime);
 
         binding.duelText.setVisibility(getView().INVISIBLE);
         binding.microgameDuelBackground.setEnabled(true);
@@ -92,6 +98,8 @@ public class DuelGameFragment extends Fragment {
 
     // The duel has started
     public void startDuel(){
+        final MediaPlayer now = MediaPlayer.create(getActivity(), R.raw.duel_now_sound);
+        now.start();
         if(!isAlreadyPressed){
             isTooEarly = false;
             binding.duelText.setText(getString(R.string.DUEL));
@@ -114,6 +122,7 @@ public class DuelGameFragment extends Fragment {
         }
     }
 
+    // Generate random int given a lower and upper bound
     public int randomIntGenerator(int lowerBound, int upperBound){
         Random random = new Random();
         return lowerBound + random.nextInt(upperBound - lowerBound);
@@ -125,7 +134,7 @@ public class DuelGameFragment extends Fragment {
         (new Handler()).postDelayed(this::exitGame, 3000);
     }
 
-    // If the click was too early, give them the too early screen and end microgame
+    // Won the Duel
     public void wonDuel(){
         binding.microgameDuelBackground.setBackgroundResource(R.drawable.microgame_duel_win);
         (new Handler()).postDelayed(this::exitGame, 3000);

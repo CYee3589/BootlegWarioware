@@ -10,6 +10,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class GameResultsFragment extends Fragment {
 
         binding = FragmentGameResultsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        final Handler handler = new Handler();
 
         boolean isGameCompleted = GameResultsFragmentArgs.fromBundle(requireArguments()).getIsGameCompleted();
         final MediaPlayer gameResultMusic;
@@ -53,9 +55,13 @@ public class GameResultsFragment extends Fragment {
         AnimationDrawable progressAnimation = (AnimationDrawable) binding.getRoot().getBackground();
         progressAnimation.start();
 
+        // the the scoreTextView with the current score
         binding.scoreTextView.setText(String.valueOf(((MainActivity)getContext()).getScore()));
+
+        // Update the lives
         updateLifeSymbols(((MainActivity)getContext()).getLivesLeft());
 
+        // Time bar
         binding.progressbar.setProgress(100);
         CountDownTimer countDown = new CountDownTimer(milliSecCounter,milliSecInterval) {
             @Override
@@ -69,13 +75,13 @@ public class GameResultsFragment extends Fragment {
                 i++;
                 binding.progressbar.setProgress(0);
 
-                // Check if Game Over or if Story mode is complete, otherwise continue with the game
-                if (((MainActivity)getContext()).isGameOver() || (((MainActivity)getContext()).getCurrentIndex() == ((MainActivity)getContext()).getGameIndexSize() + 1)){
+                // Check if Game Over. If so, do game over actions and navigate to the Game Over Fragment
+                if (((MainActivity)getContext()).isGameOver()){
                     binding.gameOverTextView.setText(R.string.game_over);
                     runGameOverAnimation();
                     final MediaPlayer gameOverMusic =  MediaPlayer.create(getActivity(), R.raw.game_over_music);
                     gameOverMusic.start();
-                    view.postDelayed(new Runnable() {
+                    handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             NavDirections action = GameResultsFragmentDirections.actionGameResultsFragmentToGameOverFragment(((MainActivity)getContext()).getScore());
@@ -83,11 +89,50 @@ public class GameResultsFragment extends Fragment {
                         }
                     }, 4000);
 
+                // If this is Story Mode
+                } else if (((MainActivity)getContext()).getIsStoryMode()){
+                    // If the boss level has been completed, sound the victory sound and navigate to ending cutscene
+//                    System.out.println("Made it to Story Mode");
+//                    System.out.println(((MainActivity)getContext()).getCurrentIndex() + " == " +  (((MainActivity)getContext()).getGameIndexSize() + 1));
+//                    System.out.println((((MainActivity)getContext()).getCurrentIndex() == ((MainActivity)getContext()).getGameIndexSize() + 1));
+                    if ((((MainActivity)getContext()).getCurrentIndex() == ((MainActivity)getContext()).getGameIndexSize() + 1)){
+//                        System.out.println("Made it to Story Mode If Statement");
+                        final MediaPlayer gameOverMusic =  MediaPlayer.create(getActivity(), R.raw.game_over_music);
+                        gameOverMusic.start();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                ((MainActivity)getContext()).setBackToNormalStory();
+                                NavDirections action = GameResultsFragmentDirections.actionGameResultsFragmentToEndingCutsceneFragment();
+                                Navigation.findNavController(view).navigate(action);
+                            }
+                        }, 4000);
+                    }
+
+                // If this is Endless Mode / default
+                } else {
+//                    System.out.println("Made it to Endless Mode");
+
+                    // If the boss level has been completed, set the currentIndex to 0, reshuffle the "gameIndexes" array, and increment the difficulty
+                    if ((((MainActivity)getContext()).getCurrentIndex() == ((MainActivity)getContext()).getGameIndexSize() + 1)){
+                        ((MainActivity)getContext()).setCurrentIndex(0);
+                        ((MainActivity)getContext()).shuffleGameIndexes();
+                        ((MainActivity)getContext()).incrementDifficulty();
+                    }
+
+                }
+//                System.out.println("Made it to the end of if else statements");
+
+                // Check if there are any "game-over moments, or if the story mode completed the boss"
+                if((((MainActivity)getContext()).isGameOver()) ||
+                        (((MainActivity)getContext()).getIsStoryMode() && (((MainActivity)getContext()).getCurrentIndex() == ((MainActivity)getContext()).getGameIndexSize() + 1))) {
+//                    System.out.println("Made it here");
                 } else {
                     ((MainActivity)getContext()).incrementScore();
                     NavDirections action = GameResultsFragmentDirections.actionGameResultsFragmentToLoadingFragment();
                     Navigation.findNavController(view).navigate(action);
                 }
+
             }
         };
 
@@ -96,12 +141,7 @@ public class GameResultsFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-
+    // Sets the images for what lifes have been viewed
     public void updateLifeSymbols(int livesLeft){
         switch(livesLeft) {
             case 0:
@@ -119,10 +159,17 @@ public class GameResultsFragment extends Fragment {
         }
     }
 
+    // Runs the Game Over animation
     private void runGameOverAnimation() {
         Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.game_over_anim);
         anim.reset();
         binding.gameOverTextView.clearAnimation();
         binding.gameOverTextView.startAnimation(anim);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

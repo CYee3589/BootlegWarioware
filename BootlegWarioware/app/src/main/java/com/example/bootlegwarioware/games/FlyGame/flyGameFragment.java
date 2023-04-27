@@ -3,6 +3,7 @@ package com.example.bootlegwarioware.games.FlyGame;
 import android.animation.ObjectAnimator;
 import android.graphics.Path;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -25,10 +26,12 @@ public class flyGameFragment extends Fragment {
 
     private FragmentFlyGameBinding binding;
 
+    // Timer Progression Bar Variables
     int i = 0;
     int milliSecCounter = 10000;
     int milliSecInterval= 1000;
 
+    // Difficulty is based on how fast the flies are
     int difficutlySpeeds[] = {12000, 11000, 10000};
 
     boolean isGameCompleted = false;
@@ -44,7 +47,7 @@ public class flyGameFragment extends Fragment {
         int difficulty = flyGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
 //        int difficulty = 1;
 
-        // Make animated background animate
+        // Start the animation for the animated background
         AnimationDrawable progressAnimation = (AnimationDrawable) binding.microgameFlyBackground.getBackground();
         progressAnimation.start();
 
@@ -52,11 +55,12 @@ public class flyGameFragment extends Fragment {
         float dpHeight = displayMetrics.heightPixels;
         float dpWidth = displayMetrics.widthPixels;
 
-
+        // If difficulty is 3/hard, add the second fly
         if (difficulty == 3){
             binding.flyButton2.setVisibility(View.VISIBLE);
         }
 
+        // Make the flies move
         ObjectAnimator animatorBug1 = createRandomMovingAnimator(difficulty, dpHeight, dpWidth, binding.flyButton);
         ObjectAnimator animatorBug2 = createRandomMovingAnimator(difficulty, dpHeight, dpWidth, binding.flyButton2);
         animatorBug1.setDuration(difficutlySpeeds[difficulty-1]);
@@ -86,7 +90,7 @@ public class flyGameFragment extends Fragment {
             }
         });
 
-
+        // Timer bar
         binding.minigameTimerBar.setProgress(100);
         CountDownTimer countDown = new CountDownTimer(milliSecCounter,milliSecInterval) {
             @Override
@@ -112,12 +116,7 @@ public class flyGameFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-
+    // Based on difficutly, check if all the flies have been clicked on.
     public boolean checkIfAllBugsAreDead(int difficulty){
         boolean results;
 
@@ -130,11 +129,14 @@ public class flyGameFragment extends Fragment {
         // If game is completed, show the win background
         if (results){
             binding.microgameFlyBackground.setBackgroundResource(R.drawable.microgame_fly_win);
+            final MediaPlayer correct = MediaPlayer.create(getActivity(), R.raw.correct_sound_effect);
+            correct.start();
         }
 
         return results;
     }
 
+    // Set the object animator to go wildly and randomly
     public ObjectAnimator createRandomMovingAnimator(int difficulty, float height, float width, ImageButton button){
         Path path = new Path();
         float w = randNum(width-500,0);
@@ -147,8 +149,15 @@ public class flyGameFragment extends Fragment {
         return ObjectAnimator.ofFloat(button, View.X, View.Y, path);
     }
 
+    // Generater a random number based on min and max bound
     public int randNum(float min, float max) {
         return (int) ((Math.random() * (max - min)) + min);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
 

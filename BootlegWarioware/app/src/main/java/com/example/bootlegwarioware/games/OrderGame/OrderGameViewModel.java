@@ -9,13 +9,19 @@ public class OrderGameViewModel extends ViewModel {
 
     boolean isGameCleared = false;
     boolean areButtonsDisabled = false;
+
+    // Timer Progression Bar Variables
     int i = 0;
     int milliSecCounter = 10000;
     int milliSecInterval= 1000;
+
+    // ALl possible words for combination based on difficutly
+    // Difficulty is based on these combination inputs and how many (4 sized combo for 1/easy and 2/medium, while 5 sized combo fro 3/hard)
     final String[] easyDifficultyList = {"RED", "BLUE", "GREEN", "YELLOW"};
     final String[] mediumDifficultyList = {"SPADE", "CLUB", "DIAMOND", "HEART"};
     final String[] hardDifficultyList = {"RED", "BLUE", "GREEN", "YELLOW", "SPADE", "CLUB", "DIAMOND", "HEART"};
 
+    // Call generateRandomCombo, based on difficutly
     public ArrayList<String> getCombination(int difficulty){
         int comboSize;
         switch (difficulty){
@@ -29,6 +35,7 @@ public class OrderGameViewModel extends ViewModel {
         }
     }
 
+    // Generate a random combination, based on difficutly and size
     public ArrayList<String> generateRandomCombo(String[] stringArray, int arrayListSize){
         ArrayList<String> outputtedArrList = new ArrayList<String>();
         for (int i = 0; i < arrayListSize; i++){
@@ -38,6 +45,7 @@ public class OrderGameViewModel extends ViewModel {
         return outputtedArrList;
     }
 
+    // Put the generated random combo into words, so the player can read the in correct sequence
     public String generateComboText(ArrayList<String> combo){
         String rightArrow = Character.toString("-".toCharArray()[0]);
         String outputString = rightArrow;
@@ -48,6 +56,7 @@ public class OrderGameViewModel extends ViewModel {
 //        return outputString += "WINNER";
     }
 
+    // Check if inputted string is within the inputted string array
     public boolean isElementInArray(String x, String[] array){
         for (String element : array) {
             if (element == x) {

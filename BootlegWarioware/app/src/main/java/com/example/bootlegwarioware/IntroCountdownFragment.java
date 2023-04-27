@@ -17,6 +17,8 @@ import com.example.bootlegwarioware.databinding.FragmentIntroCountdownBinding;
 public class IntroCountdownFragment extends Fragment {
 
     private FragmentIntroCountdownBinding binding;
+
+    // Count Down Numbers
     int milliSecCounter = 3750;
     int milliSecInterval= 1250;
     int i = 3;
@@ -28,7 +30,7 @@ public class IntroCountdownFragment extends Fragment {
         binding = FragmentIntroCountdownBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-
+        // Count Down
         CountDownTimer countDown = new CountDownTimer(milliSecCounter,milliSecInterval) {
             @Override
             public void onTick(long l) {

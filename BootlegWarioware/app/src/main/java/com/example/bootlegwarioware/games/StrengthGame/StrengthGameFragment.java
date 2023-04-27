@@ -2,6 +2,7 @@ package com.example.bootlegwarioware.games.StrengthGame;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -26,10 +27,11 @@ public class StrengthGameFragment extends Fragment {
     int milliSecInterval= 1000;
 
     boolean isGameCompleted = false;
-    int[] difficultyStrengthGoals = {10, 15, 20};
     int clickGoal;
     int currentNumberOfClicks = 0;
 
+    // Difficulty is based on the number of clicks need to complete
+    int[] difficultyStrengthGoals = {10, 20, 30};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,10 +40,10 @@ public class StrengthGameFragment extends Fragment {
         binding = FragmentStrengthGameBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-//        int difficulty = StrengthGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
-//        int speed = StrengthGameFragmentArgs.fromBundle(requireArguments()).getSpeed();
+        int difficulty = StrengthGameFragmentArgs.fromBundle(requireArguments()).getDifficulty();
+        int speed = StrengthGameFragmentArgs.fromBundle(requireArguments()).getSpeed();
 
-        int difficulty = 1;
+//        int difficulty = 1;
 
         // Make animated hands animate
         AnimationDrawable progressAnimation = (AnimationDrawable) binding.microgameStrengthBackground.getBackground();
@@ -55,7 +57,10 @@ public class StrengthGameFragment extends Fragment {
 // set the drawable as progress drawable
         binding.powerProgressBar.setProgressDrawable(draw);
 
+        // Strength button
         binding.strengthButton.setOnClickListener(new View.OnClickListener(){
+
+            // Once clicked, the counter will increment by 1, until the goal has been met, and the button will disappear
             @Override
             public void onClick(View view){
                 currentNumberOfClicks++;
@@ -69,11 +74,13 @@ public class StrengthGameFragment extends Fragment {
                     binding.strengthButton.setVisibility(View.INVISIBLE);
                     binding.powerProgressBar.setVisibility(View.INVISIBLE);
                     binding.microgameStrengthBackground.setBackgroundResource(R.drawable.microgame_strength_win);
+                    final MediaPlayer correct = MediaPlayer.create(getActivity(), R.raw.correct_sound_effect);
+                    correct.start();
                 }
             }
         });
 
-
+        // Timer bar
         binding.minigameTimerBar.setProgress(100);
         CountDownTimer countDown = new CountDownTimer(milliSecCounter,milliSecInterval) {
             @Override

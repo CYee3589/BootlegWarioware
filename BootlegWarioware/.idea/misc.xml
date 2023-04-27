@@ -22,14 +22,18 @@
         <entry key="app/src/main/res/drawable/triangle_button.xml" value="0.234" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3473731884057971" />
         <entry key="app/src/main/res/layout/fragment_demo_game.xml" value="0.3473731884057971" />
+        <entry key="app/src/main/res/layout/fragment_difficulty_select.xml" value="0.2932409977567369" />
         <entry key="app/src/main/res/layout/fragment_duel.xml" value="0.2421875" />
         <entry key="app/src/main/res/layout/fragment_duel_game.xml" value="0.3858695652173913" />
+        <entry key="app/src/main/res/layout/fragment_ending_cutscene.xml" value="0.22407226562500002" />
         <entry key="app/src/main/res/layout/fragment_flirt_game.xml" value="0.3067708333333333" />
         <entry key="app/src/main/res/layout/fragment_fly_game.xml" value="0.3740942028985507" />
         <entry key="app/src/main/res/layout/fragment_game_over.xml" value="0.2930253623188406" />
         <entry key="app/src/main/res/layout/fragment_game_results.xml" value="0.30223846435546875" />
+        <entry key="app/src/main/res/layout/fragment_game_select.xml" value="0.2979239201200181" />
         <entry key="app/src/main/res/layout/fragment_high_score.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/layout/fragment_intro_countdown.xml" value="0.2930253623188406" />
+        <entry key="app/src/main/res/layout/fragment_intro_cutscene.xml" value="0.16485507246376813" />
         <entry key="app/src/main/res/layout/fragment_loading.xml" value="0.45986403313235963" />
         <entry key="app/src/main/res/layout/fragment_nothing.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_order_game.xml" value="0.32715911865234376" />

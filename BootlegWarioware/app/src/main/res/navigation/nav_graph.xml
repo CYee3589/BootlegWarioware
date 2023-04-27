@@ -25,6 +25,9 @@
             app:destination="@id/highScoreFragment"
             app:enterAnim="@anim/clear_to_solid"
             app:exitAnim="@anim/solid_to_clear" />
+        <action
+            android:id="@+id/action_titleFragment_to_gameSelectFragment"
+            app:destination="@id/gameSelectFragment" />
     </fragment>
     <fragment
         android:id="@+id/loadingFragment"
@@ -132,6 +135,9 @@
             app:destination="@id/gameOverFragment"
             app:enterAnim="@anim/clear_to_solid"
             app:exitAnim="@anim/curtain_up" />
+        <action
+            android:id="@+id/action_gameResultsFragment_to_endingCutsceneFragment"
+            app:destination="@id/endingCutsceneFragment" />
     </fragment>
     <fragment
         android:id="@+id/highScoreFragment"
@@ -269,5 +275,53 @@
             app:destination="@id/gameResultsFragment"
             app:enterAnim="@anim/curtain_down" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/endingCutsceneFragment"
+        android:name="com.example.bootlegwarioware.EndingCutsceneFragment"
+        android:label="fragment_ending_cutscene"
+        tools:layout="@layout/fragment_ending_cutscene" >
+        <action
+            android:id="@+id/action_endingCutsceneFragment_to_gameSelectFragment"
+            app:destination="@id/gameSelectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameSelectFragment"
+        android:name="com.example.bootlegwarioware.GameSelectFragment"
+        android:label="fragment_game_select"
+        tools:layout="@layout/fragment_game_select" >
+        <action
+            android:id="@+id/action_gameSelectFragment_to_difficultySelectFragment"
+            app:destination="@id/difficultySelectFragment" />
+        <action
+            android:id="@+id/action_gameSelectFragment_to_titleFragment"
+            app:destination="@id/titleFragment" />
+        <action
+            android:id="@+id/action_gameSelectFragment_to_introCountdownFragment"
+            app:destination="@id/introCountdownFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/difficultySelectFragment"
+        android:name="com.example.bootlegwarioware.DifficultySelectFragment"
+        android:label="fragment_difficulty_select"
+        tools:layout="@layout/fragment_difficulty_select" >
+        <action
+            android:id="@+id/action_difficultySelectFragment_to_introCountdownFragment"
+            app:destination="@id/introCountdownFragment" />
+        <action
+            android:id="@+id/action_difficultySelectFragment_to_introCutsceneFragment"
+            app:destination="@id/introCutsceneFragment" />
+        <action
+            android:id="@+id/action_difficultySelectFragment_to_gameSelectFragment"
+            app:destination="@id/gameSelectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/introCutsceneFragment"
+        android:name="com.example.bootlegwarioware.IntroCutsceneFragment"
+        android:label="fragment_intro_cutscene"
+        tools:layout="@layout/fragment_intro_cutscene" >
+        <action
+            android:id="@+id/action_introCutsceneFragment_to_introCountdownFragment"
+            app:destination="@id/introCountdownFragment" />
     </fragment>
 </navigation>

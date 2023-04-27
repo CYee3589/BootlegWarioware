@@ -24,18 +24,17 @@ public class TitleFragment extends Fragment {
         binding = FragmentTitleBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-
-        final MediaPlayer titleMusic = MediaPlayer.create(getActivity(), R.raw.title_music);
-        titleMusic.setLooping(true);
-        titleMusic.start();
+//        final MediaPlayer titleMusic = MediaPlayer.create(getActivity(), R.raw.title_music);
+//        titleMusic.setLooping(true);
+//        titleMusic.start();
 
         // Once the play button is clicked, stop music, shuffle the game indexes, and move to the countdown funciton
         binding.playButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                titleMusic.stop();
+//                titleMusic.stop();
                 ((MainActivity)getContext()).shuffleGameIndexes();
-                NavDirections action = TitleFragmentDirections.actionTitleFragmentToIntroCountdownFragment();
+                NavDirections action = TitleFragmentDirections.actionTitleFragmentToGameSelectFragment();
                 Navigation.findNavController(view).navigate(action);
             }
         });
@@ -43,7 +42,7 @@ public class TitleFragment extends Fragment {
         binding.highscoreButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                titleMusic.stop();
+//                titleMusic.stop();
                 NavDirections action = TitleFragmentDirections.actionTitleFragmentToHighScoreFragment();
                 Navigation.findNavController(view).navigate(action);
             }
@@ -52,7 +51,7 @@ public class TitleFragment extends Fragment {
         binding.settingButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                titleMusic.stop();
+//                titleMusic.stop();
                 NavDirections action = TitleFragmentDirections.actionTitleFragmentToSettingsFragment();
                 Navigation.findNavController(view).navigate(action);
             }

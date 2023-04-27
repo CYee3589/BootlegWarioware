@@ -25,14 +25,15 @@ Date: 3/27/2023
 Name: Calvin Yee
 */
 
+// Game private varibles
 public class MainActivity extends AppCompatActivity {
-
     private int livesLeft = 4;
     private int score = 1;
-    private int difficulty = 1;         // difficutly runs from 1 to 3 (easy to difficuly)
-    private int speed = 1;              // speed runs from 1 to 5 (slowest to fastest)
+    private int difficulty = 1;             // difficutly runs from 1 to 3 (easy to difficuly)
+    private int speed = 1;                  // speed runs from 1 to 5 (slowest to fastest)
     private int currentIndex = 0;
-    private final int gameIndexSize = 6;
+    private final int gameIndexSize = 6;    // Size of the "gameIndexes" array
+    private Boolean isStoryMode = true;
     private int[] gameIndexes = {0, 1, 2, 3, 4, 5};
     private ArrayList<Integer> highscores = new ArrayList<Integer>();
 
@@ -60,7 +61,23 @@ public class MainActivity extends AppCompatActivity {
         this.speed = newSpeed;
     }
 
-    public void setBackToNormal(){
+    public void setCurrentIndex(int newCurrentIndex){
+        this.currentIndex = newCurrentIndex;
+    }
+
+    public void setIsStoryMode(Boolean newBool){
+        this.isStoryMode = newBool;
+    }
+
+
+    public void setBackToNormalStory(){
+        this.livesLeft = 4;
+        this.score = 1;
+        this.speed = 1;
+        this.currentIndex = 0;
+    }
+
+    public void setBackToNormalEndless(){
         this.livesLeft = 4;
         this.score = 1;
         this.difficulty = 1;
@@ -87,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
 
     public int getGameIndexSize() { return this.gameIndexSize; }
 
+    public Boolean getIsStoryMode() { return this.isStoryMode; }
+
     public ArrayList<Integer> getHighScores() { return this.highscores; }
 
     public void loseLife(){
@@ -101,6 +120,11 @@ public class MainActivity extends AppCompatActivity {
         this.currentIndex += 1;
     }
 
+    public void incrementDifficulty(){
+        if (!(this.difficulty == 3)){
+            this.difficulty += 1;
+        }
+    }
 
     public boolean isGameOver(){
         return this.livesLeft == 0;

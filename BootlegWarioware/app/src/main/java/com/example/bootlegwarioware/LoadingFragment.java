@@ -20,7 +20,10 @@ import com.example.bootlegwarioware.databinding.FragmentLoadingBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
+
+import kotlin.Triple;
 
 public class LoadingFragment extends Fragment {
 
@@ -31,36 +34,39 @@ public class LoadingFragment extends Fragment {
     int milliSecCounter = 1900;
     int milliSecInterval= 100;
 
+    String[] actions = {"TOUCH", "DRAG"};
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState ) {
 
         // Create the list of pairs with
-        List<Pair<String, NavDirections>> gameList = new ArrayList<>();
+//        List<Pair<String, NavDirections>> gameList = new ArrayList<>();
+        List<Triple<String, String, NavDirections>> gameList = new ArrayList<>();
 
-//        gameList.add(new Pair<>("CLICK", LoadingFragmentDirections.actionLoadingFragmentToDemoGameFragment(
-//                ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
-        gameList.add(new Pair<>("ORDER", LoadingFragmentDirections.actionLoadingFragmentToOrderGameFragment(
+        // Set all the games into this list
+        gameList.add(new Triple<>("ORDER", actions[0], LoadingFragmentDirections.actionLoadingFragmentToOrderGameFragment(
                 ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
-        gameList.add(new Pair<>("SWAT", LoadingFragmentDirections.actionLoadingFragmentToFlyGameFragment(
+        gameList.add(new Triple<>("SWAT", actions[0], LoadingFragmentDirections.actionLoadingFragmentToFlyGameFragment(
                 ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
-        gameList.add(new Pair<>("FLIRT", LoadingFragmentDirections.actionLoadingFragmentToFlirtGameFragment(
+        gameList.add(new Triple<>("FLIRT", actions[0], LoadingFragmentDirections.actionLoadingFragmentToFlirtGameFragment(
                 ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
-        gameList.add(new Pair<>("GIVE", LoadingFragmentDirections.actionLoadingFragmentToShoppingGameFragment(
+        gameList.add(new Triple<>("GIVE", actions[1], LoadingFragmentDirections.actionLoadingFragmentToShoppingGameFragment(
                 ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
-        gameList.add(new Pair<>("NOTHING", LoadingFragmentDirections.actionLoadingFragmentToNothingFragment(
+        gameList.add(new Triple<>("NOTHING", actions[0], LoadingFragmentDirections.actionLoadingFragmentToNothingFragment(
                 ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
-        gameList.add(new Pair<>("BUILD STRENGTH", LoadingFragmentDirections.actionLoadingFragmentToStrengthGameFragment(
+        gameList.add(new Triple<>("BULK UP", actions[0], LoadingFragmentDirections.actionLoadingFragmentToStrengthGameFragment(
                 ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed())));
 
-        Pair<String, NavDirections> bossGame = new Pair<>("DUEL",
+        // Set the boss games into this list
+        Triple<String, String, NavDirections> bossGame = new Triple<>("DUEL", actions[0],
                 LoadingFragmentDirections.actionLoadingFragmentToDuelGameFragment(
                         ((MainActivity)getContext()).getDifficulty(), ((MainActivity)getContext()).getSpeed()));
 
         binding = FragmentLoadingBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // Make animated background animate
+        // Start animation for background animate
         AnimationDrawable progressAnimation = (AnimationDrawable) binding.getRoot().getBackground();
         progressAnimation.start();
 
@@ -77,11 +83,27 @@ public class LoadingFragment extends Fragment {
 //        j = getRandomNumber(gameList.size() - 1);
         j = ((MainActivity)getContext()).getCurrentIndex();
 
-        // Show the hint
+        // Show the hint and set the icon
+        // Boss level
         if(j == ((MainActivity)getContext()).getGameIndexSize()){
-            binding.gameWordTextView.setText(bossGame.first);
+            binding.gameWordTextView.setText(bossGame.getFirst());
+            if(Objects.equals(bossGame.getSecond(), actions[0])){
+                System.out.println("Boss Touch");
+                binding.actionIcon.setBackgroundResource(R.drawable.symbol_touch);
+            } else if(Objects.equals(bossGame.getSecond(), actions[1])) {
+                System.out.println("Boss Drag");
+                binding.actionIcon.setBackgroundResource(R.drawable.symbol_drag);
+            }
+        // Regular level
         } else {
-            binding.gameWordTextView.setText(gameList.get(j).first);
+            binding.gameWordTextView.setText(gameList.get(j).getFirst());
+            if(Objects.equals(gameList.get(j).getSecond(), actions[0])){
+                System.out.println("Regular touch");
+                binding.actionIcon.setBackgroundResource(R.drawable.symbol_touch);
+            } else if(Objects.equals(gameList.get(j).getSecond(), actions[1])) {
+                System.out.println("Regular drag");
+                binding.actionIcon.setBackgroundResource(R.drawable.symbol_drag);
+            }
         }
 
         // Run the game hint animation
@@ -100,10 +122,10 @@ public class LoadingFragment extends Fragment {
                 ((MainActivity)getContext()).incrementCurrentIndex();
                 binding.progressbar.setProgress(0);
                 if(j == ((MainActivity)getContext()).getGameIndexSize()){
-                    Navigation.findNavController(view).navigate(bossGame.second);
+                    Navigation.findNavController(view).navigate(bossGame.getThird());
                 } else {
                     i++;
-                    Navigation.findNavController(view).navigate(gameList.get(j).second);
+                    Navigation.findNavController(view).navigate(gameList.get(j).getThird());
                 }
             }
         };
@@ -111,12 +133,6 @@ public class LoadingFragment extends Fragment {
         countDown.start();
 
         return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 
     // Updates the imageView status of the lives
@@ -147,5 +163,11 @@ public class LoadingFragment extends Fragment {
     // Get a random number betwee 0-max
     private int getRandomNumber(int max) {
         return ThreadLocalRandom.current().nextInt(0, max+1);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
